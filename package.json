@@ -1,0 +1,28 @@
+{
+  "name": "corgi",
+  "version": "0.0.0",
+  "description": "Modern system and service monitoring built on node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shepherds/corgi.git"
+  },
+  "keywords": [
+    "monitoring",
+    "nagios"
+  ],
+  "author": "Clay Walker <clayzermk1@gmail.com>",
+  "contributors": [ 
+    {
+      "name": "Marc Fisher"
+    } 
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shepherds/corgi/issues"
+  },
+  "os": [ "linux" ]
+}
