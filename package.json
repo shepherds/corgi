@@ -1,8 +1,9 @@
 {
   "name": "corgi",
+  "title" : "Corgi",
   "version": "0.0.0",
   "description": "Modern system and service monitoring built on node.",
-  "main": "index.js",
+  "main": "corgi.js",
   "scripts": {
     "prestart": "node node_modules/requirejs/bin/r.js -o baseUrl=public/js mainConfigFile=public/js/main.js name=../vendor/almond/almond include=main out=public/js/main.min.js wrap=true generateSourceMaps=true optimize=uglify2 preserveLicenseComments=false",
     "start": "node corgi",

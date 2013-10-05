@@ -12,7 +12,7 @@
     "backbone":              "*",
     "backbone.babysitter":   "*",
     "backbone.wreqr":        "*",
-    "bootstrap":             "2.x",
+    "bootstrap":             "*",
     "bootstrap-spinedit":    "https://github.com/Svjard/bootstrap-spinedit.git",
     "rrule":                 "https://github.com/Svjard/rrule.git",
     "d3":                    "*",
