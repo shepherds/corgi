@@ -1,0 +1,29 @@
+{
+  "name": "corgi",
+  "version": "0.0.0",
+  "main": "corgi.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "almond":                "*",
+    "backbone":              "*",
+    "backbone.babysitter":   "*",
+    "backbone.wreqr":        "*",
+    "bootstrap":             "2.x",
+    "bootstrap-spinedit":    "https://github.com/Svjard/bootstrap-spinedit.git",
+    "rrule":                 "https://github.com/Svjard/rrule.git",
+    "d3":                    "*",
+    "font-awesome":          "*",
+    "jquery":                "1.9.x",
+    "marionette":            "*",
+    "momentjs":              "*",
+    "requirejs":             "*",
+    "text":                  "*",
+    "tpl":                   "https://github.com/dawsontoth/requirejs-tpl.git",
+    "lodash":                "*",
+    "json2":                 "*"
+  }
+}
