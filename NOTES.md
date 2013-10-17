@@ -1,0 +1,12 @@
+- Set height of "#content" and test scrolling with many dashboards
+- Play around with background-color for "#content"
+- a:hover for those in .navbar should have :hover as color:white
+- Do dashboards need "settings" button with menu?
+- Add form for creating a new dashboard
+- Add basic mongo integration for logins (remember me? forgot password? register new user?)
+- Add basic mongo integration/end point for getting dashboards
+- Set dashboards as CompositeView (uses collection)
+- Add mongo integration and endpoint for adding new dashboard
+- Add end point for loading dashboard after clicking dashboard link
+- Dashboard interface:
+	* ...
