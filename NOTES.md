@@ -8,5 +8,6 @@
 - Set dashboards as CompositeView (uses collection)
 - Add mongo integration and endpoint for adding new dashboard
 - Add end point for loading dashboard after clicking dashboard link
+- responsive css for dashboards (folders), resize widths
 - Dashboard interface:
 	* ...
