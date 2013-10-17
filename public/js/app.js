@@ -12,6 +12,7 @@ define(
 
     var user,
         router,
+        home,
         model;
     var app = new Marionette.Application();
 
@@ -51,7 +52,10 @@ define(
     });
 
     vent.on('login', function() {
-      app.main.show(new views.home());
+      home = new views.home();
+      app.main.show(home);
+      home.header.show(new views.header());
+      home.content.show(new views.content());
     });
 
     /*!

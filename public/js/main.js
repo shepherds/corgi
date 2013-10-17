@@ -24,6 +24,9 @@ require.config({
     'bootstrap': {
       deps: ['jquery']
     },
+    'codemirror': {
+      exports: 'CodeMirror'
+    },
     'jquery' : {
       exports : 'jQuery'
     },

@@ -4,12 +4,8 @@ define(
   function (Marionette, templates, vent) {
     'use strict';
 
-    return Marionette.Layout.extend({
-      template: templates.home,
-      regions: {
-        header: '#header',
-        content: '#content'
-      },
+    return Marionette.ItemView.extend({
+      template: templates.header,
       initialize: function() {
       	//$(window).on('resize.profile', _.bind(this.resize, this));
       },
@@ -20,7 +16,6 @@ define(
         //this.resize();
       },
       resize: function() {
-        // TODO
       }
     });
   }
