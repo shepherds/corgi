@@ -5,12 +5,15 @@ define(
 
     return Backbone.Model.extend({
       idAttribute: 'id',
-      urlRoot: 'rest/dashboards',
+      urlRoot: 'rest/systems',
       defaults : {
         name: 'Untitled',
-        owner: 'N/A',
-        shared: [],
-        permissions: []
+        location: '',
+        ipaddr: '',
+        login: '',
+        password: '',
+        cabinet: '',
+        chasis: ''
       }
     });
   }
