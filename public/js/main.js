@@ -14,7 +14,7 @@ require.config({
     'text':                  '../vendor/text/text',
     'tpl':                   '../vendor/tpl/tpl',
     'underscore':            '../vendor/lodash/dist/lodash',
-    'moment':                '../vendor/momentjs/min/moment+langs.min'
+    'moment':                '../vendor/momentjs/min/moment-with-langs'
   },
   shim : {
     'backbone' : {

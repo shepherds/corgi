@@ -64,5 +64,29 @@ else {
       res.render('index', { title: pj.title, dev: process.argv[2] || false } );
     });
 
+    app.get('/rest/dashboards/:id?*', function(req, res) {
+      var dashboards = [];
+      if (typeof req.params.id === undefined) {
+        //dashboard['a'] = {};
+      }
+      else {
+
+      }
+
+      res.send(dashboards);
+    });
+
+    app.post('/rest/dashboards/:id?*', function(req, res) {
+      console.log(req.params.id);
+    });
+
+    app.patch('/rest/dashboards/:id?*', function(req, res) {
+      
+    });
+
+    app.delete('/rest/dashboards/:id?*', function(req, res) {
+      
+    });
+
     http.createServer(app).listen(5060);
 }

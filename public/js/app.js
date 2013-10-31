@@ -51,6 +51,10 @@ define(
     
     });
 
+    vent.on('content:new', function(error) {
+      home.content.show(new views.newdashboard());
+    });
+
     vent.on('login', function() {
       home = new views.home();
       app.main.show(home);

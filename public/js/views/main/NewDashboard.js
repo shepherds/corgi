@@ -5,10 +5,7 @@ define(
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: templates.content,
-      events: {
-        'click .new' : 'newDashboard'
-      },
+      template: templates.newdashboard,
       initialize: function() {
       	//$(window).on('resize.profile', _.bind(this.resize, this));
       },
@@ -20,9 +17,6 @@ define(
         //this.resize();
       },
       resize: function() {
-      },
-      newDashboard: function() {
-        vent.trigger('content:new');
       }
     });
   }

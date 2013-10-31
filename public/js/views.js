@@ -5,6 +5,7 @@ define(function(require) {
   	login:           require('views/Login'),
   	home:            require('views/main/Home'),
   	header:          require('views/main/Header'),
-  	content:         require('views/main/Content')
+  	content:         require('views/main/Content'),
+  	newdashboard:    require('views/main/NewDashboard')
   };
 });
