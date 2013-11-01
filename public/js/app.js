@@ -51,6 +51,10 @@ define(
     
     });
 
+    vent.on('header:admin', function(error) {
+      home.content.show(new views.admin());
+    });
+
     vent.on('content:new', function(error) {
       home.content.show(new views.newdashboard());
     });

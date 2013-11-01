@@ -6,6 +6,7 @@ define(function(require) {
   	home:            require('tpl!templates/main/home.tmpl'),
   	header:          require('tpl!templates/main/header.tmpl'),
   	content:         require('tpl!templates/main/content.tmpl'),
+  	admin:           require('tpl!templates/main/admin.tmpl'),
   	newdashboard:    require('tpl!templates/main/newdashboard.tmpl')
   };
 });

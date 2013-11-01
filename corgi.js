@@ -88,5 +88,27 @@ else {
       
     });
 
+    app.get('/rest/users/:id?*', function(req, res) {
+      var users = [];
+      if (typeof req.params.id === undefined) {
+      }
+      else {
+      }
+
+      res.send(users);
+    });
+
+    app.post('/rest/users/:id?*', function(req, res) {
+      console.log(req.params.id);
+    });
+
+    app.patch('/rest/users/:id?*', function(req, res) {
+      
+    });
+
+    app.delete('/rest/users/:id?*', function(req, res) {
+      
+    });
+
     http.createServer(app).listen(5060);
 }

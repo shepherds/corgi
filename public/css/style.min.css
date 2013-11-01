@@ -1346,5 +1346,5 @@ input[type="checkbox"].ace+.lbl,input[type="radio"].ace+.lbl{position:relative;z
 #folders .folder .dropdown-menu{margin-right:-16px}
 #folders .folder:hover{background-color:rgba(255,255,255,0.55);box-shadow:0 1px 15px rgba(0,0,0,0.15);-moz-box-shadow:0 1px 15px rgba(0,0,0,0.15);-webkit-box-shadow:0 1px 15px rgba(0,0,0,0.15)}
 #folders i{color:black}
-#main{background-color:#a3a3a3}
+#main{background-color:#f2f2f2}
 #ajax-spinner{position:absolute;top:50%;left:50%;z-index:9999;color:red}
