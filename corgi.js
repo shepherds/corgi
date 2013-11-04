@@ -29,7 +29,8 @@ else {
       app.use(express.favicon());
       app.use(express.logger('dev'));
       app.use(connect.compress());
-      app.use(express.bodyParser());
+      app.use(express.json());
+      app.use(express.urlencoded());
       app.use(express.cookieParser());
       app.use(express.methodOverride());
       app.use(app.router);
