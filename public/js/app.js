@@ -1,10 +1,11 @@
 /*global $*/
 define(
   [
-    'backbone','marionette','router','controller','vent','text!pj','views','templates'
+    'backbone','marionette','router','controller','vent','text!pj',
+    'views/Login', 'views/main/Home', 'views/main/Admin', 'views/main/Content'
   ],
-  function(
-    Backbone, Marionette, Router, Controller, vent, pj, views, templates
+  function (
+    Backbone, Marionette, Router, Controller, vent, pj, Login, Home, Admin, Content
   ) {
     'use strict';
 
@@ -35,7 +36,7 @@ define(
         //return false;
       });
 
-      app.main.show(new views.login());
+      app.main.show(new Login());
     });
 
     app.on('initialize:after', function(options) {
@@ -52,18 +53,17 @@ define(
     });
 
     vent.on('header:admin', function(error) {
-      home.content.show(new views.admin());
+      home.content.show(new Admin());
     });
 
     vent.on('content:new', function(error) {
-      home.content.show(new views.newdashboard());
+      //home.content.show(new views.newdashboard());
     });
 
-    vent.on('login', function() {
-      home = new views.home();
+    vent.on('route:home', function() {
+      home = new Home();
       app.main.show(home);
-      home.header.show(new views.header());
-      home.content.show(new views.content());
+      home.content.show(new Content());
     });
 
     /*!

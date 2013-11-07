@@ -37,6 +37,9 @@
     "mongodb": "*",
     "requirejs": "*",
     "less-middleware": "*",
-    "ejs": "*"
+    "ejs": "*",
+    "passport": "*",
+    "passport-local" : "*",
+    "bcrypt": "*"
   }
 }

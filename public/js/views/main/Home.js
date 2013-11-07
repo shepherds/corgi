@@ -1,14 +1,16 @@
 /*global define*/
 define(
-  ['marionette','templates', 'vent'],
-  function (Marionette, templates, vent) {
+  ['marionette','vent','tpl!templates/main/home.tmpl'],
+  function (Marionette, vent, home) {
     'use strict';
 
     return Marionette.Layout.extend({
-      template: templates.home,
+      template: home,
       regions: {
-        header: '#header',
         content: '#content'
+      },
+      events: {
+        'click #admin' : 'admin'
       },
       initialize: function() {
       	//$(window).on('resize.profile', _.bind(this.resize, this));
@@ -21,6 +23,9 @@ define(
       },
       resize: function() {
         // TODO
+      },
+      admin: function() {
+
       }
     });
   }

@@ -1,11 +1,11 @@
 /*global define*/
 define(
-  ['marionette','templates','vent'],
-  function (Marionette, templates, vent) {
+  ['marionette','vent','tpl!templates/main/admin.tmpl'],
+  function (Marionette, vent, admin) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: templates.admin,
+      template: admin,
       initialize: function() {
       	//$(window).on('resize.profile', _.bind(this.resize, this));
       },

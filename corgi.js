@@ -1,16 +1,4 @@
-var cluster = require('cluster');
-var numCPUs = require('os').cpus().length;
 
-if ( cluster.isMaster ) {
-    for ( var i = 0; i < numCPUs; ++i ) {
-        cluster.fork();
-    }
-
-    cluster.on('exit', function(worker, code, signal) {
-        console.log('worker ' + worker.process.pid + ' died');
-    });
-}
-else {
     var express = require('express'),
         _ = require('lodash'),
         util = require('util'),
@@ -18,7 +6,13 @@ else {
         async = require('async'),
         http = require('http'),
         path = require ('path'),
+        bcrypt = require('bcrypt'),
+        MongoClient = require('mongodb').MongoClient,
+        ObjectID = require('mongodb').ObjectID,
         connect = require('connect'),
+        passport = require('passport'),
+        LocalStrategy = require('passport-local').Strategy,
+        SALT_WORK_FACTOR = 10,
         pj = require('./package.json');
 
     var app = express();
@@ -33,6 +27,9 @@ else {
       app.use(express.urlencoded());
       app.use(express.cookieParser());
       app.use(express.methodOverride());
+      app.use(express.session({ secret: 'keyboard cat' }));
+      app.use(passport.initialize());
+      app.use(passport.session());
       app.use(app.router);
       app.use(require('less-middleware') ({
           src: __dirname + '/public/less',
@@ -46,12 +43,52 @@ else {
         app.use(express.errorHandler());
     });
 
-    function originPolicy(req, res, next) {
-        res.header('access-control-allow-origin', '*');
-        res.header('access-control-allow-headers', 'origin, content-type, accept, x-requested-with');
-        res.header('access-control-allow-methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        return next();
-    }
+    // Store pointers to mongo DBs
+    var mongoDB = 'gsstmongo.td.teradata.com:27017/corgi',
+        corgiDB,
+        Users;
+    MongoClient.connect('mongodb://' + mongoDB + '?maxPoolSize=100', function(err, db) {
+      if(err) { return console.dir(err); }
+      corgiDB = db;
+
+      Users = db.collection('Users');
+    });
+
+    passport.serializeUser(function(user, done) {
+      done(null, user._id);
+    });
+
+    passport.deserializeUser(function(id, done) {
+      Users.find({_id: ObjectID(id)}, function(err, user) {
+        done(err, user);
+      });
+    });
+
+    passport.use(new LocalStrategy(function (username, password, done) {
+      console.log(username);
+      console.log(password);
+      
+      Users.findOne({
+        'username': username
+      }, function (err, user) {
+        console.log('LOGIN');
+        console.log(user);
+
+        if (err) { console.log(err); return done(err); }
+                
+        if (!user) {
+          console.log('Could not find the user in the database.');
+          return done(null, false);
+        }
+
+        if (!bcrypt.compareSync(password, user.hash)) {
+          console.log('false');
+          return done(null, false);
+        }
+                
+        return done(null, user);
+      });
+    }));
 
     app.options('*', function(req, res) {
         res.header('Access-Control-Allow-Origin', '*');
@@ -65,7 +102,9 @@ else {
       res.render('index', { title: pj.title, dev: process.argv[2] || false } );
     });
 
-    app.get('/rest/dashboards/:id?*', function(req, res) {
+    app.post('/login', passport.authenticate('local', { successRedirect: '/#home', failureRedirect: '/' }));
+
+    app.get('/api/dashboards/:id?*', function(req, res) {
       var dashboards = [];
       if (typeof req.params.id === undefined) {
         //dashboard['a'] = {};
@@ -77,19 +116,19 @@ else {
       res.send(dashboards);
     });
 
-    app.post('/rest/dashboards/:id?*', function(req, res) {
+    app.post('/api/dashboards/:id?*', function(req, res) {
       console.log(req.params.id);
     });
 
-    app.patch('/rest/dashboards/:id?*', function(req, res) {
+    app.patch('/api/dashboards/:id?*', function(req, res) {
       
     });
 
-    app.delete('/rest/dashboards/:id?*', function(req, res) {
+    app.delete('/api/dashboards/:id?*', function(req, res) {
       
     });
 
-    app.get('/rest/users/:id?*', function(req, res) {
+    app.get('/api/users/:id?*', function(req, res) {
       var users = [];
       if (typeof req.params.id === undefined) {
       }
@@ -99,17 +138,16 @@ else {
       res.send(users);
     });
 
-    app.post('/rest/users/:id?*', function(req, res) {
+    app.post('/api/users/:id?*', function(req, res) {
       console.log(req.params.id);
     });
 
-    app.patch('/rest/users/:id?*', function(req, res) {
+    app.patch('/api/users/:id?*', function(req, res) {
       
     });
 
-    app.delete('/rest/users/:id?*', function(req, res) {
+    app.delete('/api/users/:id?*', function(req, res) {
       
     });
 
     http.createServer(app).listen(5060);
-}

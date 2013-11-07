@@ -1,11 +1,11 @@
 /*global define*/
 define(
-  ['marionette','templates','vent'],
-  function (Marionette, templates, vent) {
+  ['marionette','vent','tpl!templates/main/content.tmpl'],
+  function (Marionette, vent, content) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: templates.content,
+      template: content,
       events: {
         'click .new' : 'newDashboard'
       },

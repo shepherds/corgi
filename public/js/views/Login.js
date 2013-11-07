@@ -1,28 +1,18 @@
 /*global define*/
 define(
-  ['marionette','templates', 'vent'],
-  function (Marionette, templates, vent) {
+  ['marionette','vent','tpl!templates/login.tmpl'],
+  function (Marionette, vent, login) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: templates.login,
-      className: 'login-layout',
+      template: login,
+      className: 'tr-container container',
       events: {
-        'click #login-btn' : 'login'
-      },
-      initialize: function() {
-      	//$(window).on('resize.profile', _.bind(this.resize, this));
-      },
-      onClose: function() {
-		    //$(window).off('resize.profile');
-      },
-      onShow: function() {
-        //this.resize();
-      },
-      resize: function() {
+        'submit #login-form' : 'login'
       },
       login: function() {
-        vent.trigger('login');
+        // Validate username and password are not empty.
+        // Additionally username in the form of an email string.
       }
     });
   }
