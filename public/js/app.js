@@ -1,10 +1,11 @@
 /*global $*/
 define(
   [
-    'backbone','marionette','router','controller','vent','text!pj','svg','views','templates'
+    'backbone','marionette','router','controller','vent','text!pj',
+    'views/Login', 'views/main/Home', 'views/main/Admin', 'views/main/Content'
   ],
-  function(
-    Backbone, Marionette, Router, Controller, vent, pj, svg, views, templates
+  function (
+    Backbone, Marionette, Router, Controller, vent, pj, Login, Home, Admin, Content
   ) {
     'use strict';
 
@@ -12,11 +13,12 @@ define(
 
     var user,
         router,
+        home,
         model;
     var app = new Marionette.Application();
 
     app.addRegions({
-
+      main: '#main',
     });
 
     app.addInitializer(function(){
@@ -33,6 +35,8 @@ define(
         //e.stopImmediatePropagation();
         //return false;
       });
+
+      app.main.show(new Login());
     });
 
     app.on('initialize:after', function(options) {
@@ -46,6 +50,20 @@ define(
 
     vent.on('login:failure', function(error) {
     
+    });
+
+    vent.on('header:admin', function(error) {
+      home.content.show(new Admin());
+    });
+
+    vent.on('content:new', function(error) {
+      //home.content.show(new views.newdashboard());
+    });
+
+    vent.on('route:home', function() {
+      home = new Home();
+      app.main.show(home);
+      home.content.show(new Content());
     });
 
     /*!

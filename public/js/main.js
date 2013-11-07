@@ -4,7 +4,7 @@ require.config({
     'backbone':              '../vendor/backbone/backbone',
     'backbone.babysitter':   '../vendor/backbone.babysitter/lib/amd/backbone.babysitter',
     'backbone.wreqr':        '../vendor/backbone.wreqr/lib/amd/backbone.wreqr',
-    'bootstrap':             '../vendor/bootstrap/docs/assets/js/bootstrap',
+    'bootstrap':             '../vendor/bootstrap/dist/js/bootstrap',
     'rrule':                 '../vendor/rrule/lib/rrule',
     'd3':                    '../vendor/d3/d3',
     'jquery':                '../vendor/jquery/jquery',
@@ -13,9 +13,8 @@ require.config({
     'pj':                    'package.json', //symlink of root package.json
     'text':                  '../vendor/text/text',
     'tpl':                   '../vendor/tpl/tpl',
-    'bootstrap-spinedit':    '../vendor/bootstrap-spinedit/js/bootstrap-spinedit',
     'underscore':            '../vendor/lodash/dist/lodash',
-    'moment':                '../vendor/momentjs/min/moment+langs.min'
+    'moment':                '../vendor/momentjs/min/moment-with-langs'
   },
   shim : {
     'backbone' : {
@@ -25,8 +24,8 @@ require.config({
     'bootstrap': {
       deps: ['jquery']
     },
-    'bootstrap-spinedit': {
-      deps: ['bootstrap']
+    'codemirror': {
+      exports: 'CodeMirror'
     },
     'jquery' : {
       exports : 'jQuery'
@@ -47,7 +46,7 @@ require.config({
 });
 
 require(
-  ['app','backbone','bootstrap', 'bootstrap-spinedit', 'rrule', 'json'],
+  ['app','backbone','bootstrap', 'rrule', 'json'],
   function(app, Backbone) {
     'use strict';
 

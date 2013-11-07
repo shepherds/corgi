@@ -5,7 +5,7 @@ define(
 
     return Marionette.AppRouter.extend({
       appRoutes: {
-      
+      	'home' : 'home'
       }
     });
   }
