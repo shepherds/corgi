@@ -22,8 +22,8 @@ db.open(function(err, p_db) {
 
 	rl.question("Please enter a password for user 'admin': ", function(answer) {
 		var salt = bcrypt.genSaltSync(10);
-		var hash = bcrypt.hashSync('admin', salt);
-		var user = {username: (answer.length > 0) ? answer : 'admin', salt: salt, hash: hash};
+		var hash = bcrypt.hashSync((answer.length > 0) ? answer : 'admin', salt);
+		var user = {username: 'admin', salt: salt, hash: hash};
 
 		Users.insert(user, function(err, docs) {
 			if (err) { console.dir(err); }

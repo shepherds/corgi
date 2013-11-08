@@ -10,6 +10,7 @@
         MongoClient = require('mongodb').MongoClient,
         ObjectID = require('mongodb').ObjectID,
         connect = require('connect'),
+        sockjs = require('sockjs'),
         passport = require('passport'),
         LocalStrategy = require('passport-local').Strategy,
         SALT_WORK_FACTOR = 10,
@@ -90,6 +91,20 @@
       });
     }));
 
+    function ensureAuthenticated(req, res, next) {
+      if (req.isAuthenticated()) { return next(); }
+      res.redirect('/');
+    }
+
+    function ensureAdmin(req, res, next) {
+      if (req.user && req.user.admin === true) {
+        next();
+      }
+      else {
+        res.send(403);
+      }
+    }
+
     app.options('*', function(req, res) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Credentials', true);
@@ -98,11 +113,18 @@
         res.send(200);
     });
 
+    app.all('/secure', ensureAuthenticated);
+    app.all('/secure/admin', ensureAdmin);
+
     app.get('/', function(req, res) {
       res.render('index', { title: pj.title, dev: process.argv[2] || false } );
     });
 
-    app.post('/login', passport.authenticate('local', { successRedirect: '/#home', failureRedirect: '/' }));
+    app.get('/home', function(req, res) {
+      res.redirect('/#secure/home');
+    });
+
+    app.post('/login', passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/' }));
 
     app.get('/api/dashboards/:id?*', function(req, res) {
       var dashboards = [];
@@ -150,4 +172,23 @@
       
     });
 
-    http.createServer(app).listen(5060);
+    var server = http.createServer(app);
+
+    // WebSockets
+    var socket = sockjs.createServer({ 'sockjs_url': 'http://cdn.sockjs.org/sockjs-0.3.min.js' });
+
+    socket.on('connection', function(connection) {
+      var id = connection.id = new ObjectID().toHexString();
+
+      connections.push(connection);
+
+      connection.on('close', function() {
+        _.remove(connections, function (connection) {
+          return connection.id === id;
+        });
+      });
+    });
+
+    socket.installHandlers(server, { 'prefix': '/ws' });
+
+    server.listen(3000, '0.0.0.0');

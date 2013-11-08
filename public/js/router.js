@@ -5,7 +5,8 @@ define(
 
     return Marionette.AppRouter.extend({
       appRoutes: {
-      	'home' : 'home'
+      	//'authenticated' : 'authenticated',
+      	'secure/home' : 'home'
       }
     });
   }

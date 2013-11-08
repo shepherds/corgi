@@ -11,10 +11,9 @@ define(
 
     pj = JSON.parse(pj);
 
-    var user,
+    var hash,
         router,
-        home,
-        model;
+        home;
     var app = new Marionette.Application();
 
     app.addRegions({
@@ -36,6 +35,7 @@ define(
         //return false;
       });
 
+      hash = window.location.hash;
       app.main.show(new Login());
     });
 
@@ -44,15 +44,15 @@ define(
       Backbone.history.start();
     });
 
-    vent.on('login:success', function(data) {
-       initInterface(data);
+    vent.on('login:success', function() {
+      router.navigate(hash || '#home', { 'trigger': true });
     });
 
     vent.on('login:failure', function(error) {
-    
+      // Show error message
     });
 
-    vent.on('header:admin', function(error) {
+    vent.on('nav:admin', function(error) {
       home.content.show(new Admin());
     });
 
@@ -65,15 +65,6 @@ define(
       app.main.show(home);
       home.content.show(new Content());
     });
-
-    /*!
-     * Initializes the interface.
-     */
-    function initInterface(u) {
-      user = _.clone(u.user, true);
-
-      router.navigate(window.location.hash || '#', { 'trigger': true });
-    }
 
     return app;
   }
