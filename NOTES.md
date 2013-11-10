@@ -20,3 +20,12 @@ TODO:
 	C. Help
 		1. Get some examples from wrap bootstrap panels
 	D. Profile
+
+
+Setup
+-----
+Mongo IP Address
+Mongo Port
+Admin Username
+Admin Password
+

@@ -1,11 +1,11 @@
 /*global $*/
 define(
   [
-    'backbone','marionette','router','controller','vent','text!pj',
-    'views/Login', 'views/main/Home', 'views/main/Admin', 'views/main/Content'
+    'backbone','marionette','vent','text!pj',
+    'views/Login', 'views/Wizard', 'views/main/Home', 'views/main/Admin', 'views/main/Content'
   ],
   function (
-    Backbone, Marionette, Router, Controller, vent, pj, Login, Home, Admin, Content
+    Backbone, Marionette, vent, pj, Login, Wizard, Home, Admin, Content
   ) {
     'use strict';
 
@@ -36,7 +36,36 @@ define(
       });
 
       hash = window.location.hash;
-      app.main.show(new Login());
+      $.get('/api/settings', function(b) {
+        //if (b) {
+        // app.main.show(new Wizard());
+        //}
+        //else {
+          console.log('OK2');
+          router = new (Backbone.Marionette.AppRouter.extend({
+            "routes": {
+              "about": "about",
+              "home":  "home",
+              "admin" : "admin",
+              "config/:id": function(id) {
+              
+              },
+              "compare/:id" : function(id) {
+
+              },
+              "configs" : function() {
+
+              },
+              "profile": function() {
+                app.main.show(new Profile({user: user}));
+              }
+            }
+          }))();
+          app.main.show(new Login());
+
+          router.navigate(hash || '#home', { 'trigger': true });
+        //}
+      });
     });
 
     app.on('initialize:after', function(options) {
@@ -61,6 +90,7 @@ define(
     });
 
     vent.on('route:home', function() {
+      console.log('OK');
       home = new Home();
       app.main.show(home);
       home.content.show(new Content());

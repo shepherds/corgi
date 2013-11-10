@@ -28,9 +28,9 @@
       app.use(express.urlencoded());
       app.use(express.cookieParser());
       app.use(express.methodOverride());
-      app.use(express.session({ secret: 'keyboard cat' }));
+      //app.use(express.session({ secret: 'corgi is awesome' }));
       app.use(passport.initialize());
-      app.use(passport.session());
+      //app.use(passport.session());
       app.use(app.router);
       app.use(require('less-middleware') ({
           src: __dirname + '/public/less',
@@ -41,7 +41,7 @@
     });
 
     app.configure('development', function() {
-        app.use(express.errorHandler());
+      app.use(express.errorHandler());
     });
 
     // Store pointers to mongo DBs
@@ -113,18 +113,22 @@
         res.send(200);
     });
 
-    app.all('/secure', ensureAuthenticated);
-    app.all('/secure/admin', ensureAdmin);
+    //app.all('/secure', ensureAuthenticated);
+    //app.all('/secure/admin', ensureAdmin);
 
     app.get('/', function(req, res) {
       res.render('index', { title: pj.title, dev: process.argv[2] || false } );
     });
 
-    app.get('/home', function(req, res) {
-      res.redirect('/#secure/home');
+    app.get('/home', passport.authenticate('local', { session: false }));
+
+    app.get('/api/settings', function(req, res) {
+      fs.exists('./settings.json', function (exists) {
+        res.send({wizard: exists});
+      });
     });
 
-    app.post('/login', passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/' }));
+    app.post('/login', passport.authenticate('local', { successRedirect: '/#/home', failureRedirect: '/' }));
 
     app.get('/api/dashboards/:id?*', function(req, res) {
       var dashboards = [];

@@ -1,11 +1,11 @@
 /*global define*/
 define(
   ['marionette','vent','tpl!templates/login.tmpl'],
-  function (Marionette, vent, login) {
+  function (Marionette, vent, tmpl) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: login,
+      template: tmpl,
       className: 'tr-container container',
       events: {
         'submit #login-form' : 'login'
