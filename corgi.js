@@ -115,22 +115,22 @@
         res.send(200);
     });
 
-    //app.all('/secure', ensureAuthenticated);
-    //app.all('/secure/admin', ensureAdmin);
-
     app.get('/', function(req, res) {
       res.render('index', { title: pj.title, dev: process.argv[2] || false } );
     });
 
-    //app.get('/#/home', ensureAuthenticated);
+    app.post('/login', passport.authenticate('local', { successRedirect: '/#/home', failureRedirect: '/' }));
+
+    app.post('/api/check', function(req, res) {
+      if (req.isAuthenticated()) { return res.send(200); }
+      res.send(403);
+    });
 
     app.get('/api/settings', function(req, res) {
       fs.exists('./settings.json', function (exists) {
         res.send({wizard: exists});
       });
     });
-
-    app.post('/login', passport.authenticate('local', { successRedirect: '/#/home', failureRedirect: '/' }));
 
     app.get('/api/dashboards/:id?*', function(req, res) {
       var dashboards = [];

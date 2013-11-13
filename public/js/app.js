@@ -41,33 +41,42 @@ define(
         // app.main.show(new Wizard());
         //}
         //else {
-          router = new (Backbone.Marionette.AppRouter.extend({
-            "routes": {
-              "about": "about",
-              "home":  function() {
-                console.log('HELLO');
-                home = new Home();
-                app.main.show(home);
-                home.content.show(new Content());
-              },
-              "admin" : "admin",
-              "config/:id": function(id) {
-              
-              },
-              "compare/:id" : function(id) {
+          $.ajax({
+            error: function(jqxhr, status, error) {
+              app.main.show(new Login());
+            },
+            success: function(data, status, jqxhr) {
+              router = new (Backbone.Marionette.AppRouter.extend({
+                "routes": {
+                  "about": "about",
+                  "home":  function() {
+                    console.log('HELLO');
+                    home = new Home();
+                    app.main.show(home);
+                    home.content.show(new Content());
+                  },
+                  "admin" : "admin",
+                  "config/:id": function(id) {
+                  
+                  },
+                  "compare/:id" : function(id) {
 
-              },
-              "configs" : function() {
+                  },
+                  "configs" : function() {
 
-              },
-              "profile": function() {
-                app.main.show(new Profile({user: user}));
-              }
-            }
-          }))();
-          app.main.show(new Login());
+                  },
+                  "profile": function() {
+                    app.main.show(new Profile({user: user}));
+                  }
+                }
+              }))();
 
-          router.navigate(hash || '#', { 'trigger': true });
+              router.navigate(hash || '#home', { 'trigger': true });
+            },
+            type: 'POST',
+            url: '/api/check'
+          });
+
         //}
       });
     });
