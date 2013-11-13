@@ -28,9 +28,9 @@
       app.use(express.urlencoded());
       app.use(express.cookieParser());
       app.use(express.methodOverride());
-      //app.use(express.session({ secret: 'corgi is awesome' }));
+      app.use(express.session({ secret: 'corgi is awesome' }));
       app.use(passport.initialize());
-      //app.use(passport.session());
+      app.use(passport.session());
       app.use(app.router);
       app.use(require('less-middleware') ({
           src: __dirname + '/public/less',
@@ -86,13 +86,15 @@
           console.log('false');
           return done(null, false);
         }
-                
+        
+        console.log('GOOD');      
         return done(null, user);
       });
     }));
 
     function ensureAuthenticated(req, res, next) {
-      if (req.isAuthenticated()) { return next(); }
+      console.log(req.isAuthenticated());
+      if (req.isAuthenticated()) { return next(); }
       res.redirect('/');
     }
 
@@ -120,7 +122,7 @@
       res.render('index', { title: pj.title, dev: process.argv[2] || false } );
     });
 
-    app.get('/home', passport.authenticate('local', { session: false }));
+    //app.get('/#/home', ensureAuthenticated);
 
     app.get('/api/settings', function(req, res) {
       fs.exists('./settings.json', function (exists) {

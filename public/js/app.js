@@ -17,7 +17,7 @@ define(
     var app = new Marionette.Application();
 
     app.addRegions({
-      main: '#main',
+      main: '#main'
     });
 
     app.addInitializer(function(){
@@ -41,11 +41,15 @@ define(
         // app.main.show(new Wizard());
         //}
         //else {
-          console.log('OK2');
           router = new (Backbone.Marionette.AppRouter.extend({
             "routes": {
               "about": "about",
-              "home":  "home",
+              "home":  function() {
+                console.log('HELLO');
+                home = new Home();
+                app.main.show(home);
+                home.content.show(new Content());
+              },
               "admin" : "admin",
               "config/:id": function(id) {
               
@@ -63,22 +67,13 @@ define(
           }))();
           app.main.show(new Login());
 
-          router.navigate(hash || '#home', { 'trigger': true });
+          router.navigate(hash || '#', { 'trigger': true });
         //}
       });
     });
 
     app.on('initialize:after', function(options) {
-      router = new Router({ controller: Controller });
       Backbone.history.start();
-    });
-
-    vent.on('login:success', function() {
-      router.navigate(hash || '#home', { 'trigger': true });
-    });
-
-    vent.on('login:failure', function(error) {
-      // Show error message
     });
 
     vent.on('nav:admin', function(error) {
@@ -87,13 +82,6 @@ define(
 
     vent.on('content:new', function(error) {
       //home.content.show(new views.newdashboard());
-    });
-
-    vent.on('route:home', function() {
-      console.log('OK');
-      home = new Home();
-      app.main.show(home);
-      home.content.show(new Content());
     });
 
     return app;
