@@ -5,9 +5,11 @@
   "description": "Modern system and service monitoring built on node.",
   "main": "corgi.js",
   "scripts": {
-    "prestart": "node node_modules/requirejs/bin/r.js -o baseUrl=public/js mainConfigFile=public/js/main.js name=../vendor/almond/almond include=main out=public/js/main.min.js wrap=true generateSourceMaps=true optimize=uglify2 preserveLicenseComments=false",
-    "start": "node corgi",
-    "test": "node corgi dev"
+    "abc": "node node_modules/requirejs/bin/r.js -o baseUrl=public/js mainConfigFile=public/js/main.js name=../vendor/almond/almond include=main out=public/js/main.min.js wrap=true generateSourceMaps=true optimize=uglify2 preserveLicenseComments=false",
+    "start": "node corgi dev",
+    "test": "./node_modules/.bin/mocha test/test.js",
+    "browsertest": "./node_modules/.bin/mocha-phantomjs -R dot test/browser.html",
+    "docs": "./node_modules/.bin/docco src/corgi.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,13 @@
     "url": "https://github.com/shepherds/corgi/issues"
   },
   "os": [ "linux" ],
+  "devDependencies": {
+    "docco": "*",
+    "mocha": "*",
+    "mocha-phantomjs": "*",
+    "phantomjs": "*",
+    "chai": "*"
+  },
   "dependencies": {
     "connect" : "*",
     "express": "*",
@@ -41,6 +50,7 @@
     "passport": "*",
     "passport-local" : "*",
     "bcrypt": "*",
-    "sockjs": "*"
+    "sockjs": "*",
+    "nedb" : "*"
   }
 }

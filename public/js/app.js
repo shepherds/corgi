@@ -37,10 +37,10 @@ define(
 
       hash = window.location.hash;
       $.get('/api/settings', function(b) {
-        //if (b) {
-        // app.main.show(new Wizard());
-        //}
-        //else {
+        if (b) {
+          app.main.show(new Wizard());
+        }
+        else {
           $.ajax({
             error: function(jqxhr, status, error) {
               app.main.show(new Login());
@@ -77,7 +77,7 @@ define(
             url: '/api/check'
           });
 
-        //}
+        }
       });
     });
 

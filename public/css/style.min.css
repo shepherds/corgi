@@ -1270,7 +1270,7 @@ th.hidden-lg,td.hidden-lg{display:table-cell !important}
 .fa-vimeo-square:before{content:"\f194"}
 .fa-turkish-lira:before,.fa-try:before{content:"\f195"}
 html{min-height:100%;height:100%}
-body{min-height:100%;height:100%;background-color:#678E9E}
+body{min-height:100%;height:100%;background-color:#678E9E}body.wizard{overflow-y:auto !important}
 #main{min-height:100%;height:100%}
 .navbar{border-radius:0 !important}
 .tr-container{margin:80px auto;position:relative;text-align:center}.tr-container h3{text-align:center}

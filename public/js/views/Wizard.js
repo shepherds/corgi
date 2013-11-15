@@ -6,7 +6,13 @@ define(
 
     return Marionette.ItemView.extend({
       template: tmpl,
-      className: 'tr-container container'
+      className: 'tr-container container',
+      onShow: function() {
+        $('body').addClass('wizard');
+      },
+      onClose: function() {
+        $('body').removeClass('wizard');
+      }
     });
   }
 );
