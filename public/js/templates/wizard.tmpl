@@ -1,20 +1,20 @@
 <div class="tr">
 	<h3 style="margin-top: 30px;"><i class="fa fa-magic"></i> Setup Information</h3>
-	<form id="setup-form" class="form">
+	<form id="wizard-form" class="form">
 		<legend>Database Details</legend>
 		<fieldset>
 			<p>Do you have MongoDB setup?</p>
-			<button type="button" class="btn btn-default">Yes</button>
-			<button type="button" class="btn btn-default">No</button>
-			<div id="mongodb">
+			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'Yes' ? 'primary' : 'default' %>">Yes</button>
+			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'No' ? 'primary' : 'default' %>">No</button>
+			<div id="mongodb" class="<%= obj.mongo === 'No' ? 'hide' : '' %>">
 				<div class="form-group">
 					<label>Mongo Server Address</label>
-					<input type="text" class="form-control" name="mongoaddr">
+					<input type="text" class="form-control" name="mongoaddr" value="<%= obj.mongoaddr %>">
 					<span class="help-block">Please enter the full qualified domain name above for the MongoDB server.</span>
 				</div>
 				<div class="form-group">
 					<label>Mongo Port</label>
-					<input type="text" class="form-control" name="mongoport" value="27017">
+					<input type="text" class="form-control" name="mongoport" value="<%= obj.mongoport %>">
 					<span class="help-block">Please enter the port number for the MongoDB service is different from the default.</span>
 				</div>
 			</div>
@@ -23,24 +23,24 @@
 		<fieldset>
 			<div class="form-group">
 				<label>Admin User Password</label>
-				<input type="password" class="form-control" name="adminpassword" placeholder="Password">
+				<input type="password" class="form-control" name="adminpassword" placeholder="Password" value="<%= obj.adminpassword %>">
 			</div>
 			<div class="form-group">
 				<label>Websockets Address</label>
 				<!-- Disabled: This is grabbed autonatically -->
-				<input type="password" readonly class="form-control" name="websocketsaddr">
+				<input type="password" readonly class="form-control" name="websocketsaddr" value="<%= obj.websocketsaddr %>">
 			</div>
 			<div class="form-group">
 				<label>Monitoring Option</label>
 				<div class="radio">
 				  <label>
-				    <input type="radio" name="monitorOptions" value="sshauth" checked>
+				    <input type="radio" name="monitorOption" value="sshauth" <%= obj.monitorOption === 'sshauth' ? 'checked' : '' %>>
 				    SSH_Auth <b>(Recommended)</b>
 				  </label>
 				</div>
 				<div class="radio">
 				  <label>
-				    <input type="radio" name="monitorOptions" value="pymonitor">
+				    <input type="radio" name="monitorOption" value="pymonitor" <%= obj.monitorOption === 'pymonitor' ? 'checked' : '' %>>
 				    PyMonitor
 				  </label>
 				</div>
@@ -50,11 +50,11 @@
 		<fieldset>
 			<div class="form-group">
 				<label>Default Interval (PING)</label>
-				<input type="password" class="form-control" name="pinginterval" value="2">
+				<input type="text" class="form-control" name="pinginterval" value="<%= obj.pinginterval %>">
 			</div>
 			<div class="form-group">
 				<label>Default Interval (MONITOR)</label>
-				<input type="password" class="form-control" name="monitorinterval" value="10">
+				<input type="text" class="form-control" name="monitorinterval" value="<%= obj.monitorinterval %>">
 			</div>
 		</fieldset>
 		<legend>Packages</legend>
@@ -86,7 +86,7 @@
 			</div>
 		</fieldset>
 		<fieldset style="text-align: center;">
-			<button type="submit" class="btn btn-primary">Install</button>
+			<button id="install" type="button" class="btn btn-primary">Install</button>
 		</fieldset>
 	</form>
 </div>
