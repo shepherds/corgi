@@ -1,3 +1,4 @@
+<% console.log(obj) %>
 <div class="tr">
 	<h3 style="margin-top: 30px;"><i class="fa fa-magic"></i> Setup Information</h3>
 	<form id="wizard-form" class="form">
@@ -6,83 +7,76 @@
 			<p>Do you have MongoDB setup?</p>
 			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'Yes' ? 'primary' : 'default' %>">Yes</button>
 			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'No' ? 'primary' : 'default' %>">No</button>
+			<p><blockquote>We recommend using a clustered MongoDB replica set for Corgi. If MongoDB is not available than Corgi will use an embedded database automatically. Please see the MongoDB Manual for more details.</blockquote></p>
 			<div id="mongodb" class="<%= obj.mongo === 'No' ? 'hide' : '' %>">
-				<div class="form-group">
-					<label>Mongo Server Address</label>
+				<div class="form-group <%= (obj.valid && obj.valid.mongoaddr) ? 'has-error' : '' %>">
+					<label class="control-label">Mongo Server Address</label>
 					<input type="text" class="form-control" name="mongoaddr" value="<%= obj.mongoaddr %>">
-					<span class="help-block">Please enter the full qualified domain name above for the MongoDB server.</span>
+					<span class="help-block"><%= (obj.valid && obj.valid.mongoaddr) ? obj.valid.mongoaddr : '' %></span>
 				</div>
-				<div class="form-group">
-					<label>Mongo Port</label>
+				<div class="form-group <%= (obj.valid && obj.valid.mongoport) ? 'has-error' : '' %>">
+					<label class="control-label">Mongo Port</label>
 					<input type="text" class="form-control" name="mongoport" value="<%= obj.mongoport %>">
-					<span class="help-block">Please enter the port number for the MongoDB service is different from the default.</span>
+					<span class="help-block"><%= (obj.valid && obj.valid.mongoport) ? obj.valid.mongoport : '' %></span>
 				</div>
 			</div>
 		</fieldset>
 		<legend>Corgi Server Information</legend>
 		<fieldset>
-			<div class="form-group">
-				<label>Admin User Password</label>
+			<div class="form-group <%= (obj.valid && obj.valid.adminpassword) ? 'has-error' : '' %>">
+				<label class="control-label">Admin User Password</label>
 				<input type="password" class="form-control" name="adminpassword" placeholder="Password" value="<%= obj.adminpassword %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.adminpassword) ? obj.valid.adminpassword : '' %></span>
 			</div>
-			<div class="form-group">
-				<label>Websockets Address</label>
-				<!-- Disabled: This is grabbed autonatically -->
-				<input type="password" readonly class="form-control" name="websocketsaddr" value="<%= obj.websocketsaddr %>">
-			</div>
-			<div class="form-group">
-				<label>Monitoring Option</label>
-				<div class="radio">
-				  <label>
-				    <input type="radio" name="monitorOption" value="sshauth" <%= obj.monitorOption === 'sshauth' ? 'checked' : '' %>>
-				    SSH_Auth <b>(Recommended)</b>
-				  </label>
-				</div>
-				<div class="radio">
-				  <label>
-				    <input type="radio" name="monitorOption" value="pymonitor" <%= obj.monitorOption === 'pymonitor' ? 'checked' : '' %>>
-				    PyMonitor
-				  </label>
-				</div>
+			<div class="form-group <%= (obj.valid && obj.valid.websocketsaddr) ? 'has-error' : '' %>">
+				<label class="control-label">Websockets Address</label>
+				<input type="text" class="form-control" name="websocketsaddr" value="<%= obj.websocketsaddr %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.websocketsaddr) ? obj.valid.websocketsaddr : '' %></span>
 			</div>
 		</fieldset>
 		<legend>Polling Intervals (in secs)</legend>
 		<fieldset>
-			<div class="form-group">
-				<label>Default Interval (PING)</label>
+			<div class="form-group <%= (obj.valid && obj.valid.pinginterval) ? 'has-error' : '' %>">
+				<label class="control-label">Default Interval (PING)</label>
 				<input type="text" class="form-control" name="pinginterval" value="<%= obj.pinginterval %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.pinginterval) ? obj.valid.pinginterval : '' %></span>
 			</div>
-			<div class="form-group">
-				<label>Default Interval (MONITOR)</label>
+			<div class="form-group <%= (obj.valid && obj.valid.monitorinterval) ? 'has-error' : '' %>">
+				<label class="control-label">Default Interval (MONITOR)</label>
 				<input type="text" class="form-control" name="monitorinterval" value="<%= obj.monitorinterval %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.monitorinterval) ? obj.valid.monitorinterval : '' %></span>
 			</div>
 		</fieldset>
 		<legend>Packages</legend>
 		<fieldset>
 			<p>Choose the packages below you wish to have installed initially.</p>
 			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="1">
-			    Package 1
-			  </label>
+				<label>
+			    	<input type="checkbox" value="1">
+			    	Package 1
+			  	</label>
+			  	<span class="help-block">Description</span>
 			</div>
 			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="2">
-			    Package 2
-			  </label>
+				<label>
+			    	<input type="checkbox" value="2">
+			    	Package 2
+				</label>
+				<span class="help-block">Description</span>
 			</div>
 			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="3">
-			    Package 3
-			  </label>
+				<label>
+					<input type="checkbox" value="3">
+			    	Package 3
+				</label>
+				<span class="help-block">Description</span>
 			</div>
 			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="4">
-			    Package 4
-			  </label>
+				<label>
+					<input type="checkbox" value="4">
+			    	Package 4
+				</label>
+				<span class="help-block">Description</span>
 			</div>
 		</fieldset>
 		<fieldset style="text-align: center;">

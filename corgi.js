@@ -3,6 +3,7 @@
         _ = require('lodash'),
         util = require('util'),
         fs = require('fs'),
+        os = require('os'),
         async = require('async'),
         http = require('http'),
         path = require ('path'),

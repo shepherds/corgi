@@ -9,13 +9,31 @@ define(
       defaults : {
         mongo: 'No',
         mongoaddr: '',
-        mongoport: 27017,
+        mongoport: '27017',
         adminpassword: 'admin',
         websocketsaddr: '',
-        monitorOption: 'sshauth',
-        pinginterval: 2,
-        monitorinterval: 10,
+        pinginterval: '2',
+        monitorinterval: '10',
         packages: []
+      },
+      validation: {
+        adminpassword: {
+          required: true
+        },
+        websocketsaddr: {
+          required: true
+        },
+        pinginterval: {
+          min: 1
+        },
+        monitorinterval: {
+          min: 1
+        },
+        mongoaddr: function(value) {
+          if (this.attributes.mongo === 'Yes' && !(_.isNull(value) || _.isUndefined(value) || (_.isString(value) && trim(value) === '') || (_.isArray(value) && _.isEmpty(value)))) {
+            return 'mongoaddr is required';
+          }
+        }
       }
     });
   }

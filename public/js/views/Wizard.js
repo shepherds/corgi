@@ -14,6 +14,7 @@ define(
       },
       initialize: function() {
         this.model = new Wizard();
+        Backbone.Validation.bind(this);
       },
       onShow: function() {
         $('body').addClass('wizard');
@@ -27,9 +28,13 @@ define(
       },
       updateModel: function(ev) {
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
+        this.model.set('valid', this.model.validate());
         this.render();
       },
       install: function() {
+        // Verify the form is filled out correctly.
+        this.model.isValid()
+
         // TODO
       }
     });
