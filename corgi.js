@@ -10,6 +10,9 @@
         bcrypt = require('bcrypt'),
         MongoClient = require('mongodb').MongoClient,
         ObjectID = require('mongodb').ObjectID,
+        Db = require('mongodb').Db,
+        Server = require('mongodb').Server,
+        Datastore = require('nedb'),
         connect = require('connect'),
         sockjs = require('sockjs'),
         passport = require('passport'),
@@ -128,7 +131,56 @@
     });
 
     app.post('/setup', function(req, res) {
-      fs.writeFile('./settings.json', JSON.stringify(req.body, null, 2), function(err) {
+      // Verify mongodb can be reached if specified
+      var Users, Settings;
+      if (req.body.mongo === 'Yes') {
+        var db = new Db('corgi', new Server(req.body.mongoaddr, parseInt(req.body.mongoport)), {w: 0});
+        db.open(function(oerr, db) {
+          if (err) {
+            console.dir(oerr);
+          }
+
+          Users = db.collection('Users');
+          Settings = db.collection('Settings');
+
+          db.close();
+        });
+      }
+      else {
+        // Setup the NeDB database
+        Users = new Datastore('./users.db', autoload: true);
+        Settings = new Datastore('./settings.db', autoload: true);
+      }
+
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync(req.body.adminpassword, salt);
+      var user = {username: 'admin', salt: salt, hash: hash};
+
+      Users.insert(user, function(err, docs) {
+        if (err) {
+          console.dir(err);
+        }
+      });
+
+      var settingsObj = {
+        defaultPingInterval: parseInt(req.body.pinginterval),
+        defaultMonitorInterval: parseInt(req.body.monitorinterval)
+      };
+
+      Settings.insert(settingsObj, function(err, docs) {
+        if (err) {
+          console.dir(err);
+        }
+      });
+
+      var fileSettings = {};
+      if (req.body.mongo === 'Yes') {
+        fileSettings.mongoaddr = req.body.mongoaddr;
+        fileSettings.mongoport = req.body.mongoport;
+      }
+      fileSettings.corgiaddr = req.body.websocketsaddr;
+
+      fs.writeFile('./settings.json', JSON.stringify(fileSettings, null, 2), function(err) {
         if(err) {
         
         }
