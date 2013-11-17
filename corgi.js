@@ -3,6 +3,7 @@
         _ = require('lodash'),
         util = require('util'),
         fs = require('fs'),
+        os = require('os'),
         async = require('async'),
         http = require('http'),
         path = require ('path'),
@@ -126,9 +127,21 @@
       res.send(403);
     });
 
+    app.post('/setup', function(req, res) {
+      fs.writeFile('./settings.json', JSON.stringify(req.body, null, 2), function(err) {
+        if(err) {
+        
+        }
+        else {
+          console.log('REDIRECT');
+          res.redirect('/');
+        }
+      }); 
+    });
+
     app.get('/api/settings', function(req, res) {
       fs.exists('./settings.json', function (exists) {
-        res.send({wizard: exists});
+        res.send(exists);
       });
     });
 

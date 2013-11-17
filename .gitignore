@@ -1,3 +1,5 @@
 node_modules
 bin
 vendor
+main.min*
+public/css/style.min.css

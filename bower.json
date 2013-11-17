@@ -12,6 +12,7 @@
     "backbone":              "*",
     "backbone.babysitter":   "*",
     "backbone.wreqr":        "*",
+    "backbone.validation":   "https://github.com/thedersen/backbone.validation.git",
     "bootstrap":             "*",
     "bootstrap-spinedit":    "https://github.com/Svjard/bootstrap-spinedit.git",
     "rrule":                 "https://github.com/Svjard/rrule.git",
@@ -24,7 +25,6 @@
     "text":                  "*",
     "tpl":                   "https://github.com/dawsontoth/requirejs-tpl.git",
     "lodash":                "*",
-    "json2":                 "*",
-    "codemirror":            "https://github.com/marijnh/CodeMirror.git"
+    "json2":                 "*"
   }
 }

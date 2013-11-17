@@ -1,19 +1,87 @@
+<% console.log(obj) %>
 <div class="tr">
-	<h3 style="margin-top: 30px;">Setup Information</h3>
-	<br>
-	<span class="text-muted">Mongo Database</span>
-	<form id="setup-form" class="form">
-		<div class="form-group">
-			<label>Server IP Address</label>
-			<input type="text" class="form-control" id="ipaddr" name="ipaddr">
-		</div>
-		<div class="form-group">
-			<label></label>
-			<input type="password" class="form-control" id="password" name="password" placeholder="Password">
-		</div>
-		<div class="form-group" style="text-align: left;">
-			<button type="button" id="back-btn" class="btn btn-primary btn-xs pull-left">Back</button>	
-			<button type="button" id="next-btn" class="btn btn-primary btn-xs pull-right">Next</button>
-		</div>
+	<h3 style="margin-top: 30px;"><i class="fa fa-magic"></i> Setup Information</h3>
+	<form id="setup-form" class="form" method="POST" action="/setup">
+		<legend>Database Details</legend>
+		<fieldset>
+			<p>Do you have MongoDB setup?</p>
+			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'Yes' ? 'primary' : 'default' %>">Yes</button>
+			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'No' ? 'primary' : 'default' %>">No</button>
+			<input type="hidden" name="mongo" value="No"/>
+			<p><blockquote>We recommend using a clustered MongoDB replica set for Corgi. If MongoDB is not available than Corgi will use an embedded database automatically. Please see the MongoDB Manual for more details.</blockquote></p>
+			<div id="mongodb" class="<%= obj.mongo === 'No' ? 'hide' : '' %>">
+				<div class="form-group <%= (obj.valid && obj.valid.mongoaddr) ? 'has-error' : '' %>">
+					<label class="control-label">Mongo Server Address</label>
+					<input type="text" class="form-control" name="mongoaddr" value="<%= obj.mongoaddr %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.mongoaddr) ? obj.valid.mongoaddr : '' %></span>
+				</div>
+				<div class="form-group <%= (obj.valid && obj.valid.mongoport) ? 'has-error' : '' %>">
+					<label class="control-label">Mongo Port</label>
+					<input type="text" class="form-control" name="mongoport" value="<%= obj.mongoport %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.mongoport) ? obj.valid.mongoport : '' %></span>
+				</div>
+			</div>
+		</fieldset>
+		<legend>Corgi Server Information</legend>
+		<fieldset>
+			<div class="form-group <%= (obj.valid && obj.valid.adminpassword) ? 'has-error' : '' %>">
+				<label class="control-label">Admin User Password</label>
+				<input type="password" class="form-control" name="adminpassword" placeholder="Password" value="<%= obj.adminpassword %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.adminpassword) ? obj.valid.adminpassword : '' %></span>
+			</div>
+			<div class="form-group <%= (obj.valid && obj.valid.websocketsaddr) ? 'has-error' : '' %>">
+				<label class="control-label">Corgi Server Address</label>
+				<input type="text" class="form-control" name="websocketsaddr" value="<%= obj.websocketsaddr %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.websocketsaddr) ? obj.valid.websocketsaddr : '' %></span>
+			</div>
+		</fieldset>
+		<legend>Polling Intervals (in secs)</legend>
+		<fieldset>
+			<div class="form-group <%= (obj.valid && obj.valid.pinginterval) ? 'has-error' : '' %>">
+				<label class="control-label">Default Interval (PING)</label>
+				<input type="text" class="form-control" name="pinginterval" value="<%= obj.pinginterval %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.pinginterval) ? obj.valid.pinginterval : '' %></span>
+			</div>
+			<div class="form-group <%= (obj.valid && obj.valid.monitorinterval) ? 'has-error' : '' %>">
+				<label class="control-label">Default Interval (MONITOR)</label>
+				<input type="text" class="form-control" name="monitorinterval" value="<%= obj.monitorinterval %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.monitorinterval) ? obj.valid.monitorinterval : '' %></span>
+			</div>
+		</fieldset>
+		<legend>Packages</legend>
+		<fieldset>
+			<p>Choose the packages below you wish to have installed initially.</p>
+			<div class="checkbox">
+				<label>
+			    	<input type="checkbox" value="1">
+			    	Package 1
+			  	</label>
+			  	<span class="help-block">Description</span>
+			</div>
+			<div class="checkbox">
+				<label>
+			    	<input type="checkbox" value="2">
+			    	Package 2
+				</label>
+				<span class="help-block">Description</span>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="3">
+			    	Package 3
+				</label>
+				<span class="help-block">Description</span>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="4">
+			    	Package 4
+				</label>
+				<span class="help-block">Description</span>
+			</div>
+		</fieldset>
+		<fieldset style="text-align: center;">
+			<button id="install" type="submit" class="btn btn-primary">Install</button>
+		</fieldset>
 	</form>
 </div>
