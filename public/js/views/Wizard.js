@@ -10,7 +10,7 @@ define(
       events: {
         'click .mongo-toggle' : 'toggleMongo',
         'change [name]'       : 'updateModel',
-        'click #install'      : 'install'
+        'submit #setup-form'  : 'verify'
       },
       initialize: function() {
         this.model = new Wizard();
@@ -28,14 +28,21 @@ define(
       },
       updateModel: function(ev) {
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
+        this.doValidate();
+      },
+      doValidate: function() {
         this.model.set('valid', this.model.validate());
         this.render();
       },
-      install: function() {
+      verify: function() {
         // Verify the form is filled out correctly.
-        this.model.isValid()
+        if (!this.model.isValid()) {
+          this.doValidate();
+        }
 
-        // TODO
+        vent.trigger('route:remove', 'setup');
+
+        $(this.el).find('#setup-form').submit();
       }
     });
   }

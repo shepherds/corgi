@@ -1,11 +1,9 @@
 define(
   ['backbone'],
-  function(Backbone) {
+  function (Backbone) {
     'use strict';
 
     return Backbone.Model.extend({
-      idAttribute: 'id',
-      urlRoot: 'rest/wizard',
       defaults : {
         mongo: 'No',
         mongoaddr: '',
@@ -18,20 +16,29 @@ define(
       },
       validation: {
         adminpassword: {
-          required: true
+          required: true,
+          msg: 'Admin user password is required.'
         },
         websocketsaddr: {
-          required: true
+          required: true,
+          msg: 'Corgi server fully qualified domain name is required.'
         },
         pinginterval: {
-          min: 1
+          min: 1,
+          msg: 'Default interval for ping service is required.'
         },
         monitorinterval: {
-          min: 1
+          min: 1,
+          msg: 'Default interval for monitor service is required.'
         },
         mongoaddr: function(value) {
-          if (this.attributes.mongo === 'Yes' && !(_.isNull(value) || _.isUndefined(value) || (_.isString(value) && trim(value) === '') || (_.isArray(value) && _.isEmpty(value)))) {
-            return 'mongoaddr is required';
+          if (this.attributes.mongo === 'Yes' && Backbone.Validation.validators.required(value) === false) {
+            return 'MongoDB server fully qualified domain name is required';
+          }
+        },
+        mongoport: function(value) {
+          if (this.attributes.mongo === 'Yes' && Backbone.Validation.validators.required(value) === false) {
+            return 'MongoDB service port number is required';
           }
         }
       }

@@ -30,59 +30,50 @@ define(
         $('#ajax-spinner').hide();
       });
 
-      $(document).on('click', 'a[href="#"]', function(e) {
-        //e.stopImmediatePropagation();
-        //return false;
-      });
-
       hash = window.location.hash;
-      $.get('/api/settings', function(b) {
-        if (b) {
-          app.main.show(new Wizard());
+      router = new (Backbone.Marionette.AppRouter.extend({
+        'routes': {
+          '' : function() {
+            $.get('/api/settings', function(b) {
+              if (!b) {
+                router.navigate('#/setup');
+              }
+              else {
+                router.navigate('#/login');
+              }
+            });
+          },
+          'setup': function() {
+            app.main.show(new Wizard());
+          },
+          'login' : function() {
+            $.ajax({
+              error: function(jqxhr, status, error) {
+                app.main.show(new Login());
+              },
+              success: function(data, status, jqxhr) {
+                router.appRoute('home',  function() {
+                  home = new Home();
+                  app.main.show(home);
+                  home.content.show(new Content());
+                });
+
+                router.navigate(hash || '#/home', { 'trigger': true });
+              },
+              type: 'POST',
+              url: '/api/check'
+            });
+          } 
         }
-        else {
-          $.ajax({
-            error: function(jqxhr, status, error) {
-              app.main.show(new Login());
-            },
-            success: function(data, status, jqxhr) {
-              router = new (Backbone.Marionette.AppRouter.extend({
-                "routes": {
-                  "about": "about",
-                  "home":  function() {
-                    console.log('HELLO');
-                    home = new Home();
-                    app.main.show(home);
-                    home.content.show(new Content());
-                  },
-                  "admin" : "admin",
-                  "config/:id": function(id) {
-                  
-                  },
-                  "compare/:id" : function(id) {
-
-                  },
-                  "configs" : function() {
-
-                  },
-                  "profile": function() {
-                    app.main.show(new Profile({user: user}));
-                  }
-                }
-              }))();
-
-              router.navigate(hash || '#home', { 'trigger': true });
-            },
-            type: 'POST',
-            url: '/api/check'
-          });
-
-        }
-      });
+      }))();          
     });
 
     app.on('initialize:after', function(options) {
       Backbone.history.start();
+    });
+
+    vent.on('route:remove', function(name) {
+      delete router.routes[name];
     });
 
     vent.on('nav:admin', function(error) {

@@ -1,12 +1,13 @@
 <% console.log(obj) %>
 <div class="tr">
 	<h3 style="margin-top: 30px;"><i class="fa fa-magic"></i> Setup Information</h3>
-	<form id="wizard-form" class="form">
+	<form id="setup-form" class="form" method="POST" action="/setup">
 		<legend>Database Details</legend>
 		<fieldset>
 			<p>Do you have MongoDB setup?</p>
 			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'Yes' ? 'primary' : 'default' %>">Yes</button>
 			<button type="button" class="mongo-toggle btn btn-<%= obj.mongo === 'No' ? 'primary' : 'default' %>">No</button>
+			<input type="hidden" name="mongo" value="No"/>
 			<p><blockquote>We recommend using a clustered MongoDB replica set for Corgi. If MongoDB is not available than Corgi will use an embedded database automatically. Please see the MongoDB Manual for more details.</blockquote></p>
 			<div id="mongodb" class="<%= obj.mongo === 'No' ? 'hide' : '' %>">
 				<div class="form-group <%= (obj.valid && obj.valid.mongoaddr) ? 'has-error' : '' %>">
@@ -29,7 +30,7 @@
 				<span class="help-block"><%= (obj.valid && obj.valid.adminpassword) ? obj.valid.adminpassword : '' %></span>
 			</div>
 			<div class="form-group <%= (obj.valid && obj.valid.websocketsaddr) ? 'has-error' : '' %>">
-				<label class="control-label">Websockets Address</label>
+				<label class="control-label">Corgi Server Address</label>
 				<input type="text" class="form-control" name="websocketsaddr" value="<%= obj.websocketsaddr %>">
 				<span class="help-block"><%= (obj.valid && obj.valid.websocketsaddr) ? obj.valid.websocketsaddr : '' %></span>
 			</div>
@@ -80,7 +81,7 @@
 			</div>
 		</fieldset>
 		<fieldset style="text-align: center;">
-			<button id="install" type="button" class="btn btn-primary">Install</button>
+			<button id="install" type="submit" class="btn btn-primary">Install</button>
 		</fieldset>
 	</form>
 </div>
