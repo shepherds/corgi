@@ -24,9 +24,11 @@ define(
       },
       toggleMongo: function(ev) {
         this.model.set('mongo', $(ev.currentTarget).text());
+        $(this.el).find('[name="mongo"]').val($(ev.currentTarget).text());
         this.render();
       },
       updateModel: function(ev) {
+        debugger;
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
         this.doValidate();
       },
@@ -38,6 +40,7 @@ define(
         // Verify the form is filled out correctly.
         if (!this.model.isValid()) {
           this.doValidate();
+          return false;
         }
 
         vent.trigger('route:remove', 'setup');
