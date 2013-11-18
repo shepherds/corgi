@@ -131,8 +131,31 @@
     });
 
     app.post('/setup', function(req, res) {
-      // Verify mongodb can be reached if specified
       var Users, Settings;
+      function doSetup() {
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(req.body.adminpassword, salt);
+        var user = {username: 'admin', salt: salt, hash: hash};
+
+        Users.insert(user, function(err, docs) {
+          if (err) {
+            console.dir(err);
+          }
+        });
+
+        var settingsObj = {
+          defaultPingInterval: parseInt(req.body.pinginterval),
+          defaultMonitorInterval: parseInt(req.body.monitorinterval)
+        };
+
+        Settings.insert(settingsObj, function(err, docs) {
+          if (err) {
+            console.dir(err);
+          }
+        });
+      }
+
+      // Verify mongodb can be reached if specified
       if (req.body.mongo === 'Yes') {
         var db = new Db('corgi', new Server(req.body.mongoaddr, parseInt(req.body.mongoport)), {w: 0});
         db.open(function(oerr, db) {
@@ -143,6 +166,8 @@
           Users = db.collection('Users');
           Settings = db.collection('Settings');
 
+          doSetup();
+
           db.close();
         });
       }
@@ -150,28 +175,9 @@
         // Setup the NeDB database
         Users = new Datastore('./users.db', autoload: true);
         Settings = new Datastore('./settings.db', autoload: true);
+
+        doSetup();
       }
-
-      var salt = bcrypt.genSaltSync(10);
-      var hash = bcrypt.hashSync(req.body.adminpassword, salt);
-      var user = {username: 'admin', salt: salt, hash: hash};
-
-      Users.insert(user, function(err, docs) {
-        if (err) {
-          console.dir(err);
-        }
-      });
-
-      var settingsObj = {
-        defaultPingInterval: parseInt(req.body.pinginterval),
-        defaultMonitorInterval: parseInt(req.body.monitorinterval)
-      };
-
-      Settings.insert(settingsObj, function(err, docs) {
-        if (err) {
-          console.dir(err);
-        }
-      });
 
       var fileSettings = {};
       if (req.body.mongo === 'Yes') {

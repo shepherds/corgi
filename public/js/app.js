@@ -58,6 +58,10 @@ define(
                   home.content.show(new Content());
                 });
 
+                router.appRoute('admin',  function() {
+                  home.content.show(new Admin());
+                });
+
                 router.navigate(hash || '#/home', { 'trigger': true });
               },
               type: 'POST',

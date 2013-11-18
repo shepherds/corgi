@@ -1,11 +1,11 @@
 /*global define*/
 define(
   ['marionette','vent','tpl!templates/main/admin.tmpl'],
-  function (Marionette, vent, admin) {
+  function (Marionette, vent, tmpl) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: admin
+      template: tmpl
       
     });
   }
