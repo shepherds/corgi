@@ -1,35 +1,213 @@
 <div class="container">
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#users">Users</a></li>
-		<li><a href="#">Groups</a></li>
-		<li><a href="#">Systems</a></li>
-		<li><a href="#">Widgets</a></li>
-		<li><a href="#">Package Manager</a></li>
-	</ul>
-	<div class="tab-content">
-		<div id="users" class="tab-pane fade in active">
-			<table class="table table-hover table-striped" style="background-color: #3c3c3c;">
-				<thead>
-					<tr>
-						<th>Username</th>
-						<th>Email</th>
-						<th>&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Svjard</td>
-						<td>Marc.Fisher@teradata.com</td>
-						<td>
-							<button role="button" class="btn btn-default">Edit</button>
-							<button role="button" class="btn btn-warning">Block</button>
-							<button role="button" class="btn btn-danger">Remove</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+	<div class="admin-settings">
+        <div class="settings-nav menu-container">
+  <ul class="menu accordion js-settings-pjax" data-pjax="">
+        <li class="section">
+          <a href="/settings/profile" class="section-head">
+            <img height="20" src="https://1.gravatar.com/avatar/e25407984dcecf9983a8b0e7f184f42d?d=https%3A%2F%2Fidenticons.github.com%2F4c767eee164a092e6c4e4ba25c1939a2.png&amp;r=x&amp;s=140" width="20">
+            Svjard
+          </a>
+          <ul class="expanded section-nav">
+            <li>
+              <a href="/settings/profile" class="js-selected-navigation-item selected" data-selected-links=" /settings/profile">Profile</a>
+            </li>
+            <li>
+              <a href="/settings/admin" class="js-selected-navigation-item " data-selected-links=" /settings/admin">Account Settings</a>
+            </li>
+            <li>
+            <a href="/settings/emails" class="js-selected-navigation-item " data-selected-links=" /settings/emails">Emails</a>
+            </li>
+            <li>
+              <a href="/settings/notifications" class="js-selected-navigation-item " data-selected-links=" /settings/notifications">Notification Center</a>
+            </li>
+              <li>
+                <a href="/settings/billing" class="js-selected-navigation-item " data-selected-links=" /settings/billing">Billing</a>
+              </li>
+              <li>
+                <a href="/settings/payments" class="js-selected-navigation-item " data-selected-links=" /settings/payments">Payment History</a>
+              </li>
+            <li>
+              <a href="/settings/ssh" class="js-selected-navigation-item " data-selected-links=" /settings/ssh">SSH Keys</a>
+            </li>
+            <li>
+              <a href="/settings/security" class="js-selected-navigation-item " data-selected-links=" /settings/security">Security History</a>
+            </li>
+            <li>
+              <a href="/settings/applications" class="js-selected-navigation-item " data-selected-links="applications_settings /settings/applications">Applications</a>
+            </li>
+            <li>
+              <a href="/settings/repositories" class="js-selected-navigation-item " data-selected-links=" /settings/repositories">Repositories</a>
+            </li>
+            <li>
+              <a href="/settings/organizations" class="js-selected-navigation-item " data-selected-links=" /settings/organizations">Organizations</a>
+            </li>
+
+            <li class="usage-bar">
+              <dl>
+                <dt>Private Repos <strong>0 of 0</strong></dt>
+                <dd><span style="width: 100%" class="danger"></span></dd>
+              </dl>
+            </li>
+          </ul>
+        </li>
+        <li class="section">
+          <a href="/organizations/shepherds/settings" class="section-head">
+            <img height="20" src="https://identicons.github.com/8eb16a2a56f68e27df8d3e0a25cad0cb.png" width="20">
+            shepherds
+          </a>
+          <ul class=" section-nav" data-pjax="">
+            <li>
+              <a href="/organizations/shepherds/settings/profile" class="js-selected-navigation-item " data-selected-links=" /organizations/shepherds/settings/profile">Organization Profile</a>
+            </li>
+              <li>
+                <a href="/organizations/shepherds/settings/billing" class="js-selected-navigation-item " data-selected-links=" /organizations/shepherds/settings/billing">Billing</a>
+              </li>
+              <li>
+                <a href="/organizations/shepherds/settings/payments" class="js-selected-navigation-item " data-selected-links=" /organizations/shepherds/settings/payments">Payment History</a>
+              </li>
+              <li>
+                <a href="/organizations/shepherds/settings/security" class="js-selected-navigation-item " data-selected-links=" /organizations/shepherds/settings/security">Security History</a>
+              </li>
+            <li>
+              <a href="/organizations/shepherds/settings/applications" class="js-selected-navigation-item " data-selected-links="applications_settings /organizations/shepherds/settings/applications">Applications</a>
+            </li>
+            <li>
+              <a href="/organizations/shepherds/settings/owners" class="js-selected-navigation-item " data-selected-links=" /organizations/shepherds/settings/owners">Owners</a>
+            </li>
+            <li>
+              <a href="/organizations/shepherds/settings/members" class="js-selected-navigation-item " data-selected-links=" /organizations/shepherds/settings/members">Members</a>
+            </li>
+
+            <li class="usage-bar">
+              <dl>
+                <dt>Private Repos <strong>0 of 0</strong></dt>
+                <dd><span style="width: 100%" class="danger"></span></dd>
+              </dl>
+            </li>
+          </ul>
+        </li>
+  </ul>
+</div>
+
+    <div class="settings-content">
+      <div class="context-loader large-format-loader">
+  <p><img alt="Octocat-spinner-128" height="64" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-128.gif" width="64"></p>
+  <p>Loading…</p>
+</div>
+
+        <!-- Public Profile -->
+  <div class="boxed-group">
+    <h3>Public Profile</h3>
+    <div class="boxed-group-inner clearfix">
+      
+<dl class="form autosave " data-name="profile_name" data-action="/users/Svjard">
+  <dt><label>Name</label></dt>
+  <dd>
+    <input type="text" value="Marc Fisher" tabindex="2">
+    <span class="indicator"><img alt="Octocat-spinner-32" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16"></span>
+    <span class="success"><i class="octicon octicon-check"></i> saved</span>
+  </dd>
+  <dd class="error">
+      Something went wrong
+  </dd>
+</dl>
+
+      
+<dl class="form autosave " data-name="profile_email" data-action="/users/Svjard">
+  <dt><label>Email (will be public)</label></dt>
+  <dd>
+    <input type="text" value="mcfisher83@gmail.com" tabindex="2">
+    <span class="indicator"><img alt="Octocat-spinner-32" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16"></span>
+    <span class="success"><i class="octicon octicon-check"></i> saved</span>
+  </dd>
+  <dd class="error">
+      Something went wrong
+  </dd>
+</dl>
+
+      
+<dl class="form autosave " data-name="profile_blog" data-action="/users/Svjard">
+  <dt><label>URL</label></dt>
+  <dd>
+    <input type="text" value="" tabindex="2">
+    <span class="indicator"><img alt="Octocat-spinner-32" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16"></span>
+    <span class="success"><i class="octicon octicon-check"></i> saved</span>
+  </dd>
+  <dd class="error">
+      Something went wrong
+  </dd>
+</dl>
+
+      
+<dl class="form autosave " data-name="profile_company" data-action="/users/Svjard">
+  <dt><label>Company</label></dt>
+  <dd>
+    <input type="text" value="Teradata Inc." tabindex="2">
+    <span class="indicator"><img alt="Octocat-spinner-32" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16"></span>
+    <span class="success"><i class="octicon octicon-check"></i> saved</span>
+  </dd>
+  <dd class="error">
+      Something went wrong
+  </dd>
+</dl>
+
+      
+<dl class="form autosave " data-name="profile_location" data-action="/users/Svjard">
+  <dt><label>Location</label></dt>
+  <dd>
+    <input type="text" value="San Diego, California, USA" tabindex="2">
+    <span class="indicator"><img alt="Octocat-spinner-32" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16"></span>
+    <span class="success"><i class="octicon octicon-check"></i> saved</span>
+  </dd>
+  <dd class="error">
+      Something went wrong
+  </dd>
+</dl>
+
+        
+<dl class="form autosave " data-name="gravatar_email" data-action="/users/Svjard">
+  <dt><label>Gravatar Email <small>(Private)</small></label></dt>
+  <dd>
+    <input type="text" value="Marc.Fisher@Teradata.com" tabindex="2">
+    <span class="indicator"><img alt="Octocat-spinner-32" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16"></span>
+    <span class="success"><i class="octicon octicon-check"></i> saved</span>
+  </dd>
+  <dd class="error">
+      Something went wrong
+  </dd>
+</dl>
+
+          <div class="profile-photo clearfix">
+            <img height="30" src="https://1.gravatar.com/avatar/e25407984dcecf9983a8b0e7f184f42d?d=https%3A%2F%2Fidenticons.github.com%2F4c767eee164a092e6c4e4ba25c1939a2.png&amp;r=x&amp;s=140" width="30">
+            <p><strong><a href="https://gravatar.com">Change your avatar at Gravatar.com</a></strong>.</p>
+          </div>
+    </div>
+  </div>
+
+
+    <!-- Jobs Profile -->
+    <div class="boxed-group clearfix">
+      <h3>Jobs Profile</h3>
+      <div class="boxed-group-inner">
+        <form accept-charset="UTF-8" action="/users/Svjard" class="edit_user" id="edit_user_1489933" method="post"><div style="margin:0;padding:0;display:inline"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="Sbyjgf+phkuh/n9m2+68FViAnkbGsKPux3T315NGO1E="></div>
+          <div class="fields">
+            <p class="checkbox">
+              </p><div class="fieldWithErrors"><input name="user[profile_hireable]" type="hidden" value="0"></div><div class="fieldWithErrors"><input checked="checked" id="user_profile_hireable" name="user[profile_hireable]" tabindex="3" type="checkbox" value="1"></div>
+              <label for="user_profile_hireable">Available for hire</label>
+            <p></p>
+          </div>
+
+          <p>
+            <span class="success" style="display: none"><i class="octicon octicon-check"></i> Saved</span>
+            <button class="button primary" tabindex="4">Save Jobs Profile</button>
+          </p>
+</form>      </div>
+    </div>
+
+
+    </div>
+
+    </div>
 </div>
 
 	<div style="display:none;">
