@@ -48,20 +48,22 @@
       app.use(express.errorHandler());
     });
 
-    // Store pointers to mongo DBs
-    var corgiDB;
+    var Users, Settings;
     fs.exists('./settings.json', function(exists) {
-      var sj = require('./settings.json');
-      if (sj.mongo === 'Yes') {
-        MongoClient.connect('mongodb://' + sj.mongoaddr + ':' + sj.mongoport + '?maxPoolSize=100', function(err, db) {
-          if(err) { return console.dir(err); }
-          corgiDB = db;
-        });
-      }
-      else {
-        corgiDB = {};
-        corgiDB.users = new Datastore({ filename: './Users.db', autoload: true });
-        corgiDB.settings = new Datastore({ filename: './Settings.db', autoload: true }) 
+      if (exists) {
+        var sj = require('./settings.json');
+        if (sj.mongo === 'Yes') {
+          MongoClient.connect('mongodb://' + sj.mongoaddr + ':' + sj.mongoport + '?maxPoolSize=100', function(err, db) {
+            if(err) { return console.dir(err); }
+            
+            Users = db.collection('Users');
+            Settings = db.collection('Settings');
+          });
+        }
+        else {
+          Users = new Datastore({ filename: './users.db', autoload: true });
+          Settings = new Datastore({ filename: './settings.db', autoload: true }) 
+        }
       }
     });
     
@@ -78,6 +80,10 @@
     passport.use(new LocalStrategy(function (username, password, done) {
       console.log(username);
       console.log(password);
+
+      Users.find({}, function(err, docs) {
+        console.log(docs);
+      });
       
       Users.findOne({
         'username': username
@@ -137,7 +143,6 @@
     });
 
     app.post('/setup', function(req, res) {
-      var Users, Settings;
       function doSetup() {
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.adminpassword, salt);
@@ -148,6 +153,9 @@
             if (err) {
               console.dir(err);
             }
+
+            console.log('INSERT');
+            console.log(docs);
           });
         });
 

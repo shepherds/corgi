@@ -17,16 +17,17 @@ define(
       },
       updateModel: function(ev) {
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
-        this.doValidate();
+        if (this.submit) {
+          this.doValidate();
+        }
       },
       doValidate: function() {
-        debugger;
         this.model.set('valid', this.model.validate());
         this.render();
       },
       verify: function() {
         // Verify the form is filled out correctly.
-        console.log('WHAT?');
+        this.submit = true;
         if (!this.model.isValid()) {
           this.doValidate();
           return false;
