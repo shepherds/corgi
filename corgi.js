@@ -137,12 +137,14 @@
         var hash = bcrypt.hashSync(req.body.adminpassword, salt);
         var user = {username: 'admin', salt: salt, hash: hash};
 
-        Users.insert(user, function(err, docs) {
-          if (err) {
-            console.dir(err);
-          }
+        Users.remove({username: 'admin'}, function(err, docs) {
+          Users.insert(user, function(err, docs) {
+            if (err) {
+              console.dir(err);
+            }
+          });
         });
-
+        
         var settingsObj = {
           defaultPingInterval: parseInt(req.body.pinginterval),
           defaultMonitorInterval: parseInt(req.body.monitorinterval)
