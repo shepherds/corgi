@@ -4,11 +4,11 @@
 	<span class="text-muted">PLEASE LOG IN BELOW</span>
 	<form id="login-form" action="/login" method="post" class="form">
 		<div class="form-group <%= (obj.valid && obj.valid.username) ? 'has-error' : '' %>">
-			<input type="text" class="form-control" name="username" placeholder="Username">
+			<input type="text" class="form-control" name="username" placeholder="Username" value="<%= obj.username %>">
 			<span class="help-block"><%= (obj.valid && obj.valid.username) ? obj.valid.username : '' %></span>
 		</div>
 		<div class="form-group <%= (obj.valid && obj.valid.password) ? 'has-error' : '' %>">
-			<input type="password" class="form-control" name="password" placeholder="Password">
+			<input type="password" class="form-control" name="password" placeholder="Password" value="<%= obj.password %>">
 			<span class="help-block"><%= (obj.valid && obj.valid.password) ? obj.valid.password : '' %></span>
 		</div>
 		<div class="form-group" style="text-align: left;">
