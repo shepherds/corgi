@@ -49,16 +49,22 @@
     });
 
     // Store pointers to mongo DBs
-    var mongoDB = 'gsstmongo.td.teradata.com:27017/corgi',
-        corgiDB,
-        Users;
-    MongoClient.connect('mongodb://' + mongoDB + '?maxPoolSize=100', function(err, db) {
-      if(err) { return console.dir(err); }
-      corgiDB = db;
-
-      Users = db.collection('Users');
+    var corgiDB;
+    fs.exists('./settings.json', function(exists) {
+      var sj = require('./settings.json');
+      if (sj.mongo === 'Yes') {
+        MongoClient.connect('mongodb://' + sj.mongoaddr + ':' + sj.mongoport + '?maxPoolSize=100', function(err, db) {
+          if(err) { return console.dir(err); }
+          corgiDB = db;
+        });
+      }
+      else {
+        corgiDB = {};
+        corgiDB.users = new Datastore({ filename: './Users.db', autoload: true });
+        corgiDB.settings = new Datastore({ filename: './Settings.db', autoload: true }) 
+      }
     });
-
+    
     passport.serializeUser(function(user, done) {
       done(null, user._id);
     });
@@ -144,7 +150,7 @@
             }
           });
         });
-        
+
         var settingsObj = {
           defaultPingInterval: parseInt(req.body.pinginterval),
           defaultMonitorInterval: parseInt(req.body.monitorinterval)
@@ -175,8 +181,8 @@
       }
       else {
         // Setup the NeDB database
-        Users = new Datastore('./users.db', autoload: true);
-        Settings = new Datastore('./settings.db', autoload: true);
+        Users = new Datastore({ filename:'./users.db', autoload: true});
+        Settings = new Datastore({ filename:'./settings.db', autoload: true});
 
         doSetup();
       }
