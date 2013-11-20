@@ -12,8 +12,7 @@ define(
     pj = JSON.parse(pj);
 
     var hash,
-        router,
-        home;
+        router;
     var app = new Marionette.Application();
 
     app.addRegions({
@@ -47,19 +46,20 @@ define(
             app.main.show(new Wizard());
           },
           'login' : function() {
+            console.log('login');
             $.ajax({
               error: function(jqxhr, status, error) {
                 app.main.show(new Login());
               },
               success: function(data, status, jqxhr) {
-                router.appRoute('home',  function() {
-                  home = new Home();
-                  app.main.show(home);
-                  home.content.show(new Content());
+                console.log(router);
+                router.route('home', function() {
+                  app.main.show(new Home());
+                  app.main.currentView.content.show(new Content());
                 });
 
-                router.appRoute('admin',  function() {
-                  home.content.show(new Admin());
+                router.route('admin',  function() {
+                  app.main.currentView.content.show(new Admin());
                 });
 
                 router.navigate(hash || '#/home', { 'trigger': true });

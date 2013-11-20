@@ -1,4 +1,9 @@
 TODO:
+- Change '/' route on server-side to do check for settings.json, if not there then
+  do a new EJS render of the wizard standalone HTML. If it is there then do an EJS
+  render of the index file.
+
+
 1. If user is authenticated at endpoint '/' forward to 'home'
 2. Figure out how to protect all the endpoints of the application e.g. '/home', '/dashboard/45'
 	* Don't initialize the routes until after a user has been verified
@@ -20,12 +25,3 @@ TODO:
 	C. Help
 		1. Get some examples from wrap bootstrap panels
 	D. Profile
-
-
-Setup
------
-Mongo IP Address
-Mongo Port
-Admin Username
-Admin Password
-
