@@ -32,45 +32,41 @@ define(
       hash = window.location.hash;
       router = new (Backbone.Marionette.AppRouter.extend({
         'routes': {
-          '' : function() {
-            $.get('/api/settings', function(b) {
-              if (!b) {
-                router.navigate('#/setup');
-              }
-              else {
-                router.navigate('#/login');
-              }
-            });
-          },
-          'setup': function() {
-            app.main.show(new Wizard());
-          },
-          'login' : function() {
-            console.log('login');
-            $.ajax({
-              error: function(jqxhr, status, error) {
-                app.main.show(new Login());
-              },
-              success: function(data, status, jqxhr) {
-                console.log(router);
-                router.route('home', function() {
-                  app.main.show(new Home());
-                  app.main.currentView.content.show(new Content());
-                });
-
-                router.route('admin',  function() {
-                  app.main.currentView.content.show(new Admin());
-                });
-
-                router.navigate(hash || '#/home', { 'trigger': true });
-              },
-              type: 'POST',
-              url: '/api/check'
-            });
-          } 
+          'home' : _.wrap(function home() {
+              app.main.show(new Home());
+              app.main.currentView.content.show(new Content());
+            }, auth
+          ),
+          'admin/:page' : function() {
+            console.log('route:admin');
+          }
         }
-      }))();          
+      }))();
+
+      $.get('/api/settings', function(b) {
+        if (!b) {
+          app.main.show(new Wizard());
+        }
+        else {
+          if (hash.length === 0) {
+            router.navigate('#/home', {trigger: true});
+          }
+        }
+      });
     });
+
+    function auth(func) {
+      $.ajax({
+        error: function(jqxhr, status, error) {
+          app.main.show(new Login());
+        },
+        success: function(data, status, jqxhr) {
+          func();
+        },
+        type: 'POST',
+        url: 'api/check'
+      });
+    }
 
     app.on('initialize:after', function(options) {
       Backbone.history.start();

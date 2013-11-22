@@ -151,7 +151,7 @@
       function doSetup() {
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.adminpassword, salt);
-        var user = {username: 'admin', salt: salt, hash: hash};
+        var user = {username: 'admin', email: req.body.adminemail, salt: salt, hash: hash};
 
         Users.remove({username: 'admin'}, function(err, docs) {
           Users.insert(user, function(err, docs) {

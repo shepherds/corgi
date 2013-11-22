@@ -9,6 +9,7 @@ define(
         mongoaddr: '',
         mongoport: '27017',
         adminpassword: 'admin',
+        adminemail: '',
         websocketsaddr: '',
         pinginterval: '2',
         monitorinterval: '10',
