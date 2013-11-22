@@ -48,10 +48,10 @@
       app.use(express.errorHandler());
     });
 
-    var Users, Settings;
+    var Users, Settings, sj;
     fs.exists('./settings.json', function(exists) {
       if (exists) {
-        var sj = require('./settings.json');
+        sj = require('./settings.json');
         if (sj.mongo === 'Yes') {
           MongoClient.connect('mongodb://' + sj.mongoaddr + ':' + sj.mongoport + '?maxPoolSize=100', function(err, db) {
             if(err) { return console.dir(err); }
@@ -72,7 +72,12 @@
     });
 
     passport.deserializeUser(function(id, done) {
-      Users.find({_id: ObjectID(id)}, function(err, user) {
+      var _id = id;
+      if (sj.mongo === 'Yes') {
+        _id = new Object(id);
+      }
+
+      Users.find({_id: _id}, function(err, user) {
         done(err, user);
       });
     });
@@ -146,7 +151,7 @@
       function doSetup() {
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.adminpassword, salt);
-        var user = {username: 'admin', salt: salt, hash: hash};
+        var user = {username: 'admin', email: req.body.adminemail, salt: salt, hash: hash};
 
         Users.remove({username: 'admin'}, function(err, docs) {
           Users.insert(user, function(err, docs) {
@@ -207,6 +212,7 @@
         
         }
         else {
+          sj = require('./settings.json');
           console.log('REDIRECT');
           res.redirect('/');
         }
