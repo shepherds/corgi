@@ -2,10 +2,10 @@
 define(
   [
     'backbone','marionette','vent','text!pj',
-    'views/Login', 'views/Wizard', 'views/main/Home', 'views/main/Admin', 'views/main/Content'
+    'views/Login', 'views/Wizard', 'views/main/Home', 'views/main/Admin', 'views/main/Content', 'views/nav/Navbar'
   ],
   function (
-    Backbone, Marionette, vent, pj, Login, Wizard, Home, Admin, Content
+    Backbone, Marionette, vent, pj, Login, Wizard, Home, Admin, Content, Navbar
   ) {
     'use strict';
 
@@ -16,6 +16,7 @@ define(
     var app = new Marionette.Application();
 
     app.addRegions({
+      navbar: '#navbar',
       main: '#main'
     });
 
@@ -37,9 +38,11 @@ define(
               app.main.currentView.content.show(new Content());
             }, auth
           ),
-          'admin/:page' : function() {
-            console.log('route:admin');
-          }
+          'admin' : _.wrap(function home() {
+              app.main.show(new Home());
+              app.main.currentView.content.show(new Admin());
+            }, auth
+          )
         }
       }))();
 
@@ -48,6 +51,7 @@ define(
           app.main.show(new Wizard());
         }
         else {
+          app.navbar.show(new Navbar());
           if (hash.length === 0) {
             router.navigate('#/home', {trigger: true});
           }

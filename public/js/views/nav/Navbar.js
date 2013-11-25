@@ -1,13 +1,12 @@
 /*global define*/
+
 define(
-  ['marionette','vent','tpl!templates/main/admin.tmpl'],
+  ['marionette','vent','tpl!templates/nav/navbar.tmpl'],
   function (Marionette, vent, tmpl) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: tmpl,
-      className: 'admin-panel'
+      template: tmpl
     });
   }
 );
-

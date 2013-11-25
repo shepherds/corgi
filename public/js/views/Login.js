@@ -6,7 +6,7 @@ define(
 
     return Marionette.ItemView.extend({
       template: tmpl,
-      className: 'tr-container container',
+      className: 'loginContainer',
       events: {
         'change [name]'      : 'updateModel',
         'submit #login-form' : 'verify'

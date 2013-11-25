@@ -12,9 +12,47 @@
   <div id="ajax-spinner" class="hide">
       <i class="icon-spinner icon-spin icon-4x"></i>
   </div>
-  <div id="main">
 
+   <!-- Navigation -->
+  <nav id="navbar" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+    
+  </nav>
+
+  <!-- Main -->
+  <div  class="row">
+    <div class="col-xs-12">
+      <div class="repository-sidebar">
+        <div class="sunken-menu" style="float: left;margin-top: 15px;">
+          <div class="sunken-menu-contents">
+            <ul class="sunken-menu-group">
+              <li data-toggle="tooltip" data-placement="right" data-title="Dashboards">
+                <a href="#/dashboards" aria-label="Dashboards" class="selected sunken-menu-item item-archie" data-gotokey="a">
+                  <i class="fa fa-bar-chart-o"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Profile">
+                <a href="#/profile/permissions" aria-label="Profile" class="sunken-menu-item item-profile">
+                  <i class="fa fa-user"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Admin">
+                <a href="#/admin" aria-label="Admin" class="sunken-menu-item item-admin">
+                  <i class="fa fa-lock"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="pull-right-main">
+        <div id="main">
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Modal Container -->
+  <div id="modal"></div>
 
   <script src="//use.edgefonts.net/adamina:n4:all.js"></script>
   <% if (dev) { %>
