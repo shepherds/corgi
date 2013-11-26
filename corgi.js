@@ -137,10 +137,19 @@
     });
 
     app.get('/', function(req, res) {
-      res.render('index', { title: pj.title, dev: process.argv[2] || false } );
+      if (req.isAuthenticated()){
+        res.render('index', { title: pj.title, dev: process.argv[2] || false } );
+      }
+      else {
+        res.render('login', { title: pj.title, dev: process.argv[2] || false } );
+      }
     });
 
     app.post('/login', passport.authenticate('local', { successRedirect: '/#/home', failureRedirect: '/' }));
+    app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+    });
 
     app.post('/api/check', function(req, res) {
       if (req.isAuthenticated()) { return res.send(200); }
