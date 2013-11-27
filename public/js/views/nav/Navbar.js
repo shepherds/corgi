@@ -1,8 +1,8 @@
 /*global define*/
 
 define(
-  ['marionette','vent','tpl!templates/nav/navbar.tmpl'],
-  function (Marionette, vent, tmpl) {
+  ['marionette','tpl!templates/nav/navbar.tmpl'],
+  function (Marionette, tmpl) {
     'use strict';
 
     return Marionette.ItemView.extend({

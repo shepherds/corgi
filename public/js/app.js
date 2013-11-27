@@ -2,10 +2,10 @@
 define(
   [
     'backbone','marionette','vent','text!pj',
-    'views/Login', 'views/Wizard', 'views/main/Home', 'views/main/Admin', 'views/main/Content', 'views/nav/Navbar'
+    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/Content', 'views/nav/Navbar'
   ],
   function (
-    Backbone, Marionette, vent, pj, Login, Wizard, Home, Admin, Content, Navbar
+    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Content, Navbar
   ) {
     'use strict';
 
@@ -34,13 +34,11 @@ define(
       router = new (Backbone.Marionette.AppRouter.extend({
         'routes': {
           'home' : _.wrap(function home() {
-              app.main.show(new Home());
-              app.main.currentView.content.show(new Content());
+              app.main.show(new Content());
             }, auth
           ),
           'admin' : _.wrap(function home() {
-              app.main.show(new Home());
-              app.main.currentView.content.show(new Admin());
+              app.main.show(new Admin());
             }, auth
           )
         }
@@ -62,6 +60,7 @@ define(
     function auth(func) {
       $.ajax({
         error: function(jqxhr, status, error) {
+          console.log('login');
           app.main.show(new Login());
         },
         success: function(data, status, jqxhr) {

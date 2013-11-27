@@ -1,27 +1,69 @@
-TODO:
-- Change '/' route on server-side to do check for settings.json, if not there then
-  do a new EJS render of the wizard standalone HTML. If it is there then do an EJS
-  render of the index file.
+Issues:
 
+1. Forgot password needs to be implemented (w/ email)
+-Persist a reset key in your database along with a timestamp. 
+-Create a route accepting the reset key and new password. 
+-Verify the reset key's timestamp when applying the new password to the user.
+-https://github.com/substack/node-password-reset
 
-1. If user is authenticated at endpoint '/' forward to 'home'
-2. Figure out how to protect all the endpoints of the application e.g. '/home', '/dashboard/45'
-	* Don't initialize the routes until after a user has been verified
-3. Trying to access '/home' when not authenticated should kick back to login page
-4. Add error message to login form
-5. Add validation before submitting login form, username, password are required
-6. Need a new logo (use Etsy?)
-7. Add logout code/handling
-8. Pages
-	A. Admin
-		1. Use https://github.com/settings/profile as design for handling admin section
-		2. Admin section must be secure. User must have admin role applied to access.
-		3. Sections: Users, Groups, Servers, Services?, Data Centers, Widgets?, Package Manager, etc..
-	B. Content
-		1. Add a new dashboard form. Dashboard names must be unique, check against database.
-		2. Notices on primary dashboard view.
-		3. Drill-down to dashboard with routes: /dashboard/abc
-		4. Adding content to a dashboard?
-	C. Help
-		1. Get some examples from wrap bootstrap panels
-	D. Profile
+2. Check password strength = http://danielstudds.com/page/2/
+
+3.? zxcvbn (check password score)?
+
+4. Add data centers and servers as main routes on side navigation
+
+5. Add "changeNav" from Archie for routes
+
+6. Improve the look-n-feel of the admin menu
+
+7. Profile (http://bootstrapmaster.com/live/genius/page-profile.html)
+	- Side panel 
+
+7. Users
+	- Listing + filter + new user button: http://detail.herokuapp.com/user-list.html
+	- No images but support gravatars
+	- First, Last, email, Title, Signed Up, Last Logged In, ?
+	- Permissions?
+
+8. Groups
+	- ?
+
+8. Dashboards
+	- New
+	- Existing ones as boxes to click on
+	- Creating a new one/publishing
+
+9. Extensions Manager
+	- http://teraworks/display/GF/Viewpoint+2.0+Add+Content
+	- http://wrapbootstrap.com/preview/WB0B30DGR
+	- Define extensions and create ping extension as first
+	- Widgets + Monitoring stuff
+		- Heatmap
+		- Forecasting
+
+10. Servers
+	- FQDN, GROUPs, Data Center, Chasis, Cabinet
+	- Initially need Login+Password for SSH support (Ping only then no)
+	- Bulk import with CSV
+	- Add new
+	- Remove
+	- Update
+	- Table shows the basic info and basic resource utilization (latency, cpu, io, disk, etc..)
+	- Click to drill in further
+	- Timelapse views of data (fixed dashboard)
+
+11. Data Centers
+	- Similiar to the Svenson setup and functionality
+	- Ability to dynamically add cabinets and components
+	- Ability to partition tiles for planning
+	- Load/Save
+
+11. Services
+	-
+
+https://docs.newrelic.com/docs/windows-server-monitoring/server-monitor-installation-windows
+https://docs.newrelic.com/docs/windows-server-monitoring/server-monitor-installation-windows
+https://docs.newrelic.com/docs/windows-server-monitoring/server-monitoring-alerts
+https://docs.newrelic.com/docs/features/alert-api-examples
+SDK
+REST API (token)

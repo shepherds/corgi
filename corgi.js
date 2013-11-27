@@ -17,6 +17,7 @@
         sockjs = require('sockjs'),
         passport = require('passport'),
         LocalStrategy = require('passport-local').Strategy,
+        uuid = require('node-uuid'),
         SALT_WORK_FACTOR = 10,
         pj = require('./package.json');
 
@@ -149,6 +150,18 @@
     app.get('/logout', function(req, res) {
       req.logout();
       res.redirect('/');
+    });
+
+    app.get('/forgot', function(req, res) {
+      // Persist a reset key in your database along with a timestamp.
+      var id = uuid.v4();
+      var d = new Date();
+      var timestamp = d.setDate(d.getDate() + 3);
+
+      Users.findAndModify({'username': username}, [['username', 1]], {$set: {reset:id, timestamp: timestamp} }, function(err, doc) {
+        // Send an email to the user with the link
+        
+      });
     });
 
     app.post('/api/check', function(req, res) {
