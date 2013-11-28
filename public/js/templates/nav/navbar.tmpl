@@ -12,7 +12,17 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
-      <li><a id="help" href="#"><i class="fa fa-question"></i> Help</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="font-size: 1.5em;" class="fa fa-exclamation-triangle"></i></a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="font-size: 1.5em;" class="fa fa-calendar"></i></a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li>
+      <li><a href="#/help"><i class="fa fa-question"></i> Help</a></li>
       <li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
     </ul>
   </div><!-- /.navbar-collapse -->

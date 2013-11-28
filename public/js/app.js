@@ -35,7 +35,7 @@ define(
         'routes': {
           'home' : _.wrap(function home() {
               app.main.show(new Content());
-              changeNav('dashboards');
+              changeNav('home');
             }, auth
           ),
           'servers' : _.wrap(function servers() {

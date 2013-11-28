@@ -437,7 +437,6 @@ left: 9px;
 		border-right: 1px solid #CCC;
 		-webkit-padding-start: 0;
 		text-shadow: 0 1px 0 #fff;
-		background-color: #f7f5fa;
 
 		.menu {
 			list-style: none;
@@ -464,13 +463,156 @@ left: 9px;
 				}
 
 				a.selected {
-					background-color: #EEE;
-					border-right: 2px solid red;
-					display: block;
+					background-color: #f7f5fa;
+          display: block;
 					color: #716b7a;
 					padding: 5px 20px;
+          border-left: 2px solid #ba5d0f;
 				}
 			}
 		}
 	}
+}
+
+.folders-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+
+  #folders {
+    margin: 0px auto 0px auto;
+
+    .folder {
+      position: relative;
+      float: left;
+      display: block;
+      list-style: none;
+      width: 320px;
+      height: 240px;
+      min-width: 250px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      margin: 30px;
+      transition: 0.1s linear;
+      -moz-transition: 0.1s linear;
+      -webkit-transition: 0.1s linear;
+
+      &.new {
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .bottom {
+        font-family: Helvetica, Arial, sans-serif;
+        color: #32302f;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        font-size: 12px;
+        border-top: 1px solid #EEE;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-border-radius: 0 0 6px 6px;
+        -moz-border-radius: 0 0 6px 6px;
+        border-radius: 0 0 6px 6px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0px 15px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        transition: 0.1s linear;
+        -moz-transition: 0.1s linear;
+        -webkit-transition: 0.1s linear;
+
+        .left {
+          opacity: 1.0;
+        }
+      }
+
+      .bottom > * {
+        line-height: 40px;
+        vertical-align: middle;
+        transition: 0.1s linear;
+        -moz-transition: 0.1s linear;
+        -webkit-transition: 0.1s linear;
+      }
+
+      .dropdown-menu {
+        margin-right: -16px;
+      }
+    }
+
+    .folder:hover {
+      background-color: rgba(255,255, 255, 0.55);
+      box-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .folder > a {
+      height: 200px;
+      width: 100%;
+      line-height: 200px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .folder > a:before {
+      font-family: 'FontAwesome';
+      position: absolute;
+      font-size: 10em;
+      opacity: 0.3;
+      top: 0px;
+      left: 50%;
+      margin-left: -80px;
+      content: "\f0e4";
+    }
+
+    .folder.new > a:before {
+      font-family: 'FontAwesome';
+      position: absolute;
+      font-size: 10em;
+      opacity: 0.3;
+      top: 0px;
+      left: 50%;
+      margin-left: -80px;
+      content: "\f067";
+    }
+
+    .folder > a > h3 {
+      font-family: Helvetica, Arial, sans-serif;
+      width: 100%;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      color: #333;
+      padding: 10px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      text-decoration: none;
+      word-wrap: break-word;
+    }
+  }
+  
+  #folders > ul {
+    margin: 0px 0px 120px 0px;
+    padding-bottom: 110px;
+  }
+
+  .dropdown-toggle {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
 }
