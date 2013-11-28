@@ -21,7 +21,9 @@ Check the <a href="https://github.com/shepherds/corgi/wiki/Change-log" target="_
 * Built to be scalable and fast!
 
 ## Installation
-TODO
+
+Start the server with `node corgi.js`.
+Direct a browser on the same machine to [http://0.0.0.0:3000/](http://0.0.0.0:3000/).
 
 ## API
 TODO
@@ -29,6 +31,28 @@ TODO
 ## Testing
 
 ## Browser support
+
+Compatible OS/Browsers:
+* Linux/Chrome
+* Linux/Firefox
+* iOS/Safari
+* iOS/Chrome
+* Android/Chrome
+
+## Dependencies
+
+Be sure to run `npm install && bower install` to fetch the latest dependencies.
+Afterwards, be sure to build sockjs-client per [the instructions](https://github.com/sockjs/sockjs-client#development-and-testing).
+
+```shell
+cd public/vendor/sockjs-client
+echo "echo \\" | cat - version > VERSION-GEN
+npm install
+npm install --dev
+make sockjs.js
+```
+
+This application was built using node 0.10.21.
 
 ## Performance
 

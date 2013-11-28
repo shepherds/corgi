@@ -12,9 +12,62 @@
   <div id="ajax-spinner" class="hide">
       <i class="icon-spinner icon-spin icon-4x"></i>
   </div>
-  <div id="main">
 
+   <!-- Navigation -->
+  <nav id="navbar" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+    
+  </nav>
+
+  <!-- Main -->
+  <div  class="row">
+    <div class="col-xs-12">
+      <div class="repository-sidebar">
+        <div class="sunken-menu" style="float: left;margin-top: 15px;">
+          <div class="sunken-menu-contents">
+            <ul class="sunken-menu-group">
+              <li data-toggle="tooltip" data-placement="right" data-title="Dashboards">
+                <a href="#/home" aria-label="Dashboards" class="selected sunken-menu-item item-home selected" data-gotokey="a">
+                  <i class="fa fa-dashboard"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Servers">
+                <a href="#/servers" aria-label="Servers" class="sunken-menu-item item-servers">
+                  <i class="fa fa-hdd-o"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Services">
+                <a href="#/services" aria-label="Services" class="sunken-menu-item item-services">
+                  <i class="fa fa-compass"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Data Centers">
+                <a href="#/datacenters" aria-label="Data Centers" class="sunken-menu-item item-data-centers">
+                  <i class="fa fa-building-o"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Profile">
+                <a href="#/profile/permissions" aria-label="Profile" class="sunken-menu-item item-profile">
+                  <i class="fa fa-user"></i>
+                </a>
+              </li>
+              <li data-toggle="tooltip" data-placement="right" data-title="Admin">
+                <a href="#/admin" aria-label="Admin" class="sunken-menu-item item-admin">
+                  <i class="fa fa-lock"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="pull-right-main">
+        <div id="main">
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Modal Container -->
+  <div id="modal"></div>
 
   <script src="//use.edgefonts.net/adamina:n4:all.js"></script>
   <% if (dev) { %>

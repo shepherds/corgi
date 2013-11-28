@@ -25,6 +25,7 @@
     "text":                  "*",
     "tpl":                   "https://github.com/dawsontoth/requirejs-tpl.git",
     "lodash":                "*",
-    "json2":                 "*"
+    "json2":                 "*",
+    "sockjs-client":         "*"
   }
 }

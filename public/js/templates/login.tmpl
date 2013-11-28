@@ -1,19 +1,24 @@
-<div class="tr">
-	<h3 style="margin-top: 30px;">Welcome to Corgi</h3>
-	<br>
-	<span class="text-muted">PLEASE LOG IN BELOW</span>
-	<form id="login-form" action="/login" method="post" class="form">
-		<div class="form-group <%= (obj.valid && obj.valid.username) ? 'has-error' : '' %>">
-			<input type="text" class="form-control" name="username" placeholder="Username" value="<%= obj.username %>">
-			<span class="help-block"><%= (obj.valid && obj.valid.username) ? obj.valid.username : '' %></span>
-		</div>
-		<div class="form-group <%= (obj.valid && obj.valid.password) ? 'has-error' : '' %>">
-			<input type="password" class="form-control" name="password" placeholder="Password" value="<%= obj.password %>">
-			<span class="help-block"><%= (obj.valid && obj.valid.password) ? obj.valid.password : '' %></span>
-		</div>
-		<div class="form-group" style="text-align: left;">
-			<a href="#" style="border-bottom: 1px dashed #000;">Forgot Password?</a>
-			<button type="submit" id="login-btn" class="btn btn-primary btn-xs pull-right">Log In</button>
-		</div>
-	</form>
-</div> <!-- /#login -->
+ <form class="form-horizontal" action="/login" method="POST" id="login-form" role="form">
+    <div class="form-group <%= (obj.valid && obj.valid.username) ? 'has-error' : '' %>">
+        <label class="col-lg-12 control-label" for="username">Username:</label>
+        <div class="col-lg-12">
+            <input type="text" id="username" name="username" class="form-control" value="<%= obj.username %>">
+            <span class="fa fa-user right gray marginR10"></span>
+            <span class="help-block"><%= (obj.valid && obj.valid.username) ? obj.valid.username : '' %></span>
+        </div>
+    </div><!-- End .form-group  -->
+    <div class="form-group <%= (obj.valid && obj.valid.password) ? 'has-error' : '' %>">
+        <label class="col-lg-12 control-label" for="password">Password:</label>
+        <div class="col-lg-12">
+            <input type="password" id="password" name="password" class="form-control" value="<%= obj.password %>">
+            <span class="fa fa-lock right gray marginR10"></span>
+            <span class="help-block"><%= (obj.valid && obj.valid.password) ? obj.valid.password : '' %></span>
+            <span class="forgot help-block"><a href="#">Forgot your password?</a></span>
+        </div>
+    </div><!-- End .form-group  -->
+    <div class="form-group">
+        <div class="col-lg-12 clearfix form-actions">
+            <button type="submit" class="btn btn-info right" id="loginBtn"><span class="fa fa-sign-in white"></span> Login</button>
+        </div>
+    </div><!-- End .form-group  -->
+</form>
