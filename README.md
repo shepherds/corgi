@@ -25,7 +25,7 @@ Check the <a href="https://github.com/shepherds/corgi/wiki/Change-log" target="_
 Start the server with `node corgi.js`.
 Direct a browser on the same machine to [http://0.0.0.0:3000/](http://0.0.0.0:3000/).
 
-## API
+## REST API
 TODO
 
 ## Testing
@@ -33,6 +33,10 @@ TODO
 ## Browser support
 
 Compatible OS/Browsers:
+* Windows/Chrome
+* Windows/Firefox
+* Windows/IE9
+* Windows/IE10
 * Linux/Chrome
 * Linux/Firefox
 * iOS/Safari
@@ -59,6 +63,8 @@ This application was built using node 0.10.21.
 ## Memory footprint
 
 ## Wigets
+
+## Contributing
 
 ## License 
 

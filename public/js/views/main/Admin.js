@@ -4,9 +4,12 @@ define(
   function (Marionette, tmpl) {
     'use strict';
 
-    return Marionette.ItemView.extend({
+    return Marionette.Layout.extend({
       template: tmpl,
-      className: 'admin-panel'
+      className: 'admin-panel',
+      regions: {
+      	content: '#admin-content'
+      }
     });
   }
 );

@@ -2,10 +2,10 @@
 define(
   [
     'backbone','marionette','vent','text!pj',
-    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/Content', 'views/nav/Navbar'
+    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/admin/Users', 'views/main/Servers', 'views/main/Content', 'views/nav/Navbar'
   ],
   function (
-    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Content, Navbar
+    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Content, Navbar
   ) {
     'use strict';
 
@@ -39,7 +39,7 @@ define(
             }, auth
           ),
           'servers' : _.wrap(function servers() {
-              app.main.show(new Content());
+              app.main.show(new Servers());
               changeNav('servers');
             }, auth
           ),
@@ -58,8 +58,17 @@ define(
               changeNav('profile');
             }, auth
           ),
-          'admin' : _.wrap(function home() {
+          'admin/:page' : _.wrap(function admin(page) {
+              console.log('Page: ' + page);
+              console.log((page === 'users'));
+              debugger;
               app.main.show(new Admin());
+              if (page === 'users') {
+                app.main.currentView.content.show(new Users());
+              }
+              else if (page === 'extensions') {
+                app.main.currentView.content.show(new Users());
+              }
               changeNav('admin');
             }, auth
           )
@@ -80,13 +89,15 @@ define(
     });
 
     function auth(func) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      console.log(args);
       $.ajax({
         error: function(jqxhr, status, error) {
           console.log('login');
           app.main.show(new Login());
         },
         success: function(data, status, jqxhr) {
-          func();
+          func.apply(this, args);
         },
         type: 'POST',
         url: 'api/check'
