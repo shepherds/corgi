@@ -40,6 +40,43 @@
 				<span class="help-block"><%= (obj.valid && obj.valid.websocketsaddr) ? obj.valid.websocketsaddr : '' %></span>
 			</div>
 		</fieldset>
+		<legend>Authentication Setup</legend>
+		<fieldset>
+			<div class="form-group">
+				<label class="control-label">Mechanism</label>
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				    <%= obj.mechanism %> <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu">
+				    <li><a href="#">Built-in</a></li>
+				    <li><a href="#">LDAP</a></li>
+				  </ul>
+				</div>
+			</div>
+			<% if (obj.mechanism === 'LDAP') { %>
+			<div class="form-group <%= (obj.valid && obj.valid.ldapurl) ? 'has-error' : '' %>">
+				<label class="control-label">LDAP URL</label>
+				<input type="text" class="form-control" name="ldapurl" value="<%= obj.ldapurl %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.ldapurl) ? obj.valid.ldapurl : '' %></span>
+			</div>
+			<div class="form-group <%= (obj.valid && obj.valid.ldapadminuser) ? 'has-error' : '' %>">
+				<label class="control-label">LDAP Administrator Dn</label>
+				<input type="text" class="form-control" name="ldapadminuser" value="<%= obj.ldapadminuser %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.ldapadminuser) ? obj.valid.ldapadminuser : '' %></span>
+			</div>
+			<div class="form-group <%= (obj.valid && obj.valid.ldapadminpassword) ? 'has-error' : '' %>">
+				<label class="control-label">LDAP Administrator Password</label>
+				<input type="text" class="form-control" name="ldapadminpassword" value="<%= obj.ldapadminpassword %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.ldapadminpassword) ? obj.valid.ldapadminpassword : '' %></span>
+			</div>
+			<div class="form-group <%= (obj.valid && obj.valid.ldapsearchbase) ? 'has-error' : '' %>">
+				<label class="control-label">LDAP Search Base</label>
+				<input type="text" class="form-control" name="ldapsearchbase" value="<%= obj.ldapsearchbase %>">
+				<span class="help-block"><%= (obj.valid && obj.valid.ldapsearchbase) ? obj.valid.ldapsearchbase : '' %></span>
+			</div>
+			<% } %>
+		</fieldset>
 		<legend>Polling Intervals (in secs)</legend>
 		<fieldset>
 			<div class="form-group <%= (obj.valid && obj.valid.pinginterval) ? 'has-error' : '' %>">

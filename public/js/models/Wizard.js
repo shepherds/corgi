@@ -13,6 +13,12 @@ define(
         websocketsaddr: '',
         pinginterval: '2',
         monitorinterval: '10',
+        mechanism: 'Built-in',
+        ldapurl: 'ldap://',
+        ldapadminusername: 'cn=root',
+        ldapadminpassword: '',
+        ldapsearchbase: 'dc=corp,dc=corporate,dc=com',
+        ldapsearchfilter: '(uid={{username}})',
         packages: []
       },
       validation: {
@@ -31,6 +37,26 @@ define(
         monitorinterval: {
           min: 1,
           msg: 'Default interval for monitor service is required.'
+        },
+        ldapurl: {
+          required: true,
+          msg: 'LDAP URL is required.'
+        },
+        ldapadminusername: {
+          required: true,
+          msg: 'LDAP administrator designated name is required.'
+        },
+        ldapadminpassword: {
+          required: true,
+          msg: 'LDAP administrator password is required.'
+        },
+        ldapsearchbase: {
+          required: true,
+          msg: 'LDAP search base is required.'
+        },
+        ldapsearchfilter: {
+          required: true,
+          msg: 'LDAP search filter is required.'
         },
         mongoaddr: function(value) {
           if (this.attributes.mongo === 'Yes' && Backbone.Validation.validators.required(value) === false) {
