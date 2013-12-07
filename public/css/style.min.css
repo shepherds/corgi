@@ -1357,8 +1357,20 @@ div.centerContent{margin:0;display:block}
 .sunken-menu .sunken-menu-item .octicon{left:-1px;color:#999999;transition:color .25s ease-in;-webkit-transition:color .25s ease-in 0;width:16px;text-align:center}
 .sunken-menu .sunken-menu-item.selected .octicon{color:#333333}
 .sunken-menu .sunken-menu-item .mini-loader{display:none;position:absolute;top:9px;left:9px}
-.admin-panel .sidebar{border-right:1px solid #CCC;-webkit-padding-start:0;text-shadow:0 1px 0 #fff;background-color:#f7f5fa}.admin-panel .sidebar .menu{list-style:none;text-align:right;font-size:18px}.admin-panel .sidebar .menu li.item:first{margin-top:30px}
+.admin-panel .sidebar{border-right:1px solid #CCC;-webkit-padding-start:0;text-shadow:0 1px 0 #fff}.admin-panel .sidebar .menu{list-style:none;text-align:right;font-size:18px}.admin-panel .sidebar .menu li.item:first{margin-top:30px}
 .admin-panel .sidebar .menu li.item{margin-top:5px}.admin-panel .sidebar .menu li.item a{padding:5px 0px}
 .admin-panel .sidebar .menu li.item a:hover{text-decoration:none;backgound-color:#EEE;display:block;color:#716b7a;padding:5px 20px}
-.admin-panel .sidebar .menu li.item a.selected{background-color:#EEE;border-right:2px solid red;display:block;color:#716b7a;padding:5px 20px}
+.admin-panel .sidebar .menu li.item a.selected{background-color:#f7f5fa;display:block;color:#716b7a;padding:5px 20px;border-left:2px solid #ba5d0f}
+input.search{padding:5px 6px;position:relative;top:0px;background:url("http://detail.herokuapp.com/img/lens.png") #fcfcfc no-repeat 95%;box-shadow:none;height:25px;width:220px;font-size:13px;padding:2px 6px;border:1px solid #d0dde9;margin:0;border-radius:2px;top:11px}
+.folders-wrapper{height:100%;width:100%;overflow-y:auto}.folders-wrapper #folders{margin:0px auto 0px auto}.folders-wrapper #folders .folder{position:relative;float:left;display:block;list-style:none;width:320px;height:240px;min-width:250px;box-shadow:0 1px 5px rgba(0,0,0,0.2);-moz-box-shadow:0 1px 5px rgba(0,0,0,0.2);-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.2);background-color:rgba(255,255,255,0.4);border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;margin:30px;transition:0.1s linear;-moz-transition:0.1s linear;-webkit-transition:0.1s linear}.folders-wrapper #folders .folder.new{background-color:rgba(255,255,255,0.2);box-shadow:0 1px 5px rgba(0,0,0,0.3);-moz-box-shadow:0 1px 5px rgba(0,0,0,0.3);-webkit-box-shadow:0 1px 5px rgba(0,0,0,0.3)}
+.folders-wrapper #folders .folder .bottom{font-family:Helvetica,Arial,sans-serif;color:#32302f;position:absolute;bottom:0;left:0;width:100%;font-size:12px;border-top:1px solid #EEE;background-color:rgba(255,255,255,0.4);-webkit-border-radius:0 0 6px 6px;-moz-border-radius:0 0 6px 6px;border-radius:0 0 6px 6px;height:40px;line-height:40px;padding:0px 15px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;transition:0.1s linear;-moz-transition:0.1s linear;-webkit-transition:0.1s linear}.folders-wrapper #folders .folder .bottom .left{opacity:1.0}
+.folders-wrapper #folders .folder .bottom>*{line-height:40px;vertical-align:middle;transition:0.1s linear;-moz-transition:0.1s linear;-webkit-transition:0.1s linear}
+.folders-wrapper #folders .folder .dropdown-menu{margin-right:-16px}
+.folders-wrapper #folders .folder:hover{background-color:rgba(255,255,255,0.55);box-shadow:0 1px 15px rgba(0,0,0,0.15);-moz-box-shadow:0 1px 15px rgba(0,0,0,0.15);-webkit-box-shadow:0 1px 15px rgba(0,0,0,0.15)}
+.folders-wrapper #folders .folder>a{height:200px;width:100%;line-height:200px;display:inline-block;position:relative}
+.folders-wrapper #folders .folder>a:before{font-family:'FontAwesome';position:absolute;font-size:10em;opacity:0.3;top:0px;left:50%;margin-left:-80px;content:"\f0e4"}
+.folders-wrapper #folders .folder.new>a:before{font-family:'FontAwesome';position:absolute;font-size:10em;opacity:0.3;top:0px;left:50%;margin-left:-80px;content:"\f067"}
+.folders-wrapper #folders .folder>a>h3{font-family:Helvetica,Arial,sans-serif;width:100%;font-size:16px;letter-spacing:1px;display:inline-block;vertical-align:middle;text-align:center;color:#333;padding:10px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;text-decoration:none;word-wrap:break-word}
+.folders-wrapper #folders>ul{margin:0px 0px 120px 0px;padding-bottom:110px}
+.folders-wrapper .dropdown-toggle{box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none}
 #ajax-spinner{position:absolute;top:50%;left:50%;z-index:9999;color:red}

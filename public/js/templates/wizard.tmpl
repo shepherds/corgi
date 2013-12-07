@@ -42,40 +42,37 @@
 		</fieldset>
 		<legend>Authentication Setup</legend>
 		<fieldset>
-			<div class="form-group">
-				<label class="control-label">Mechanism</label>
-				<div class="btn-group">
-				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				    <%= obj.mechanism %> <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="#">Built-in</a></li>
-				    <li><a href="#">LDAP</a></li>
-				  </ul>
+			<p>Choose the login mechanism would you like to configure?</p>
+			<button type="button" class="login-toggle btn btn-<%= obj.loginmechanism === 'Built-in' ? 'primary' : 'default' %>" style="margin-bottom: 30px;">Built-in</button>
+			<button type="button" class="login-toggle btn btn-<%= obj.loginmechanism === 'LDAP' ? 'primary' : 'default' %>" style="margin-bottom: 30px;">LDAP</button>
+			<input type="hidden" name="loginmechanism" value="No"/>
+			<div id="ldap" class="<%= obj.loginmechanism === 'Built-in' ? 'hide' : '' %>">
+				<div class="form-group <%= (obj.valid && obj.valid.ldapurl) ? 'has-error' : '' %>">
+					<label class="control-label">LDAP URL</label>
+					<input type="text" class="form-control" name="ldapurl" value="<%= obj.ldapurl %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.ldapurl) ? obj.valid.ldapurl : '' %></span>
+				</div>
+				<div class="form-group <%= (obj.valid && obj.valid.ldapadminuser) ? 'has-error' : '' %>">
+					<label class="control-label">LDAP Administrator Dn</label>
+					<input type="text" class="form-control" name="ldapadminuser" value="<%= obj.ldapadminuser %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.ldapadminuser) ? obj.valid.ldapadminuser : '' %></span>
+				</div>
+				<div class="form-group <%= (obj.valid && obj.valid.ldapadminpassword) ? 'has-error' : '' %>">
+					<label class="control-label">LDAP Administrator Password</label>
+					<input type="text" class="form-control" name="ldapadminpassword" value="<%= obj.ldapadminpassword %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.ldapadminpassword) ? obj.valid.ldapadminpassword : '' %></span>
+				</div>
+				<div class="form-group <%= (obj.valid && obj.valid.ldapsearchbase) ? 'has-error' : '' %>">
+					<label class="control-label">LDAP Search Base</label>
+					<input type="text" class="form-control" name="ldapsearchbase" value="<%= obj.ldapsearchbase %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.ldapsearchbase) ? obj.valid.ldapsearchbase : '' %></span>
+				</div>
+				<div class="form-group <%= (obj.valid && obj.valid.ldapsearchfilter) ? 'has-error' : '' %>" style="margin-bottom: 30px;">
+					<label class="control-label">LDAP Filter</label>
+					<input type="text" class="form-control" name="ldapsearchfilter" value="<%= obj.ldapsearchfilter %>">
+					<span class="help-block"><%= (obj.valid && obj.valid.ldapsearchfilter) ? obj.valid.ldapsearchfilter : '' %></span>
 				</div>
 			</div>
-			<% if (obj.mechanism === 'LDAP') { %>
-			<div class="form-group <%= (obj.valid && obj.valid.ldapurl) ? 'has-error' : '' %>">
-				<label class="control-label">LDAP URL</label>
-				<input type="text" class="form-control" name="ldapurl" value="<%= obj.ldapurl %>">
-				<span class="help-block"><%= (obj.valid && obj.valid.ldapurl) ? obj.valid.ldapurl : '' %></span>
-			</div>
-			<div class="form-group <%= (obj.valid && obj.valid.ldapadminuser) ? 'has-error' : '' %>">
-				<label class="control-label">LDAP Administrator Dn</label>
-				<input type="text" class="form-control" name="ldapadminuser" value="<%= obj.ldapadminuser %>">
-				<span class="help-block"><%= (obj.valid && obj.valid.ldapadminuser) ? obj.valid.ldapadminuser : '' %></span>
-			</div>
-			<div class="form-group <%= (obj.valid && obj.valid.ldapadminpassword) ? 'has-error' : '' %>">
-				<label class="control-label">LDAP Administrator Password</label>
-				<input type="text" class="form-control" name="ldapadminpassword" value="<%= obj.ldapadminpassword %>">
-				<span class="help-block"><%= (obj.valid && obj.valid.ldapadminpassword) ? obj.valid.ldapadminpassword : '' %></span>
-			</div>
-			<div class="form-group <%= (obj.valid && obj.valid.ldapsearchbase) ? 'has-error' : '' %>">
-				<label class="control-label">LDAP Search Base</label>
-				<input type="text" class="form-control" name="ldapsearchbase" value="<%= obj.ldapsearchbase %>">
-				<span class="help-block"><%= (obj.valid && obj.valid.ldapsearchbase) ? obj.valid.ldapsearchbase : '' %></span>
-			</div>
-			<% } %>
 		</fieldset>
 		<legend>Polling Intervals (in secs)</legend>
 		<fieldset>

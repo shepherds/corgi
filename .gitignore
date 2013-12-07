@@ -18,14 +18,14 @@ vendor
 unit.xml
 test/fixtures/.build
 
-
 .project
 .idea
 .settings
 .iml
 
-
 .DS_Store*
 ehthumbs.db
 Icon?
 Thumbs.db
+*.db
+settings.json
