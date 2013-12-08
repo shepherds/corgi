@@ -146,7 +146,7 @@
       }
     });
 
-    app.post('/login', passport.authenticate('local', { successRedirect: '/#/home', failureRedirect: '/' }));
+    app.post('/login', passport.authenticate('local', { successRedirect: '/#/dashboards', failureRedirect: '/' }));
     app.get('/logout', function(req, res) {
       req.logout();
       res.redirect('/');

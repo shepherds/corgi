@@ -26,6 +26,7 @@
     "tpl":                   "https://github.com/dawsontoth/requirejs-tpl.git",
     "lodash":                "*",
     "json2":                 "*",
-    "sockjs-client":         "*"
+    "sockjs-client":         "*",
+    "zxcvbn":                "https://github.com/lowe/zxcvbn.git"
   }
 }

@@ -5,13 +5,12 @@ define(
 
     return Backbone.Model.extend({
       idAttribute: 'id',
-      urlRoot: 'rest/systems',
+      urlRoot: 'rest/servers',
       defaults : {
-        name: 'Untitled',
-        location: '',
+        name: '',
         ipaddr: '',
-        login: '',
-        password: '',
+        groups: [],
+        datacenter: '',
         cabinet: '',
         chasis: ''
       }

@@ -1,34 +1,24 @@
 # Corgi
 
-Modern system and service monitoring built on node.
+Modern system and service monitoring with data center planning built on node.
+[![Build Status](https://api.travis-ci.org/shepherds/corgi.png)](http://travis-ci.org/shepherds/corgi)
+
 
 ![ScreenShot](https://raw.github.com/shepherds/corgi/master/docs/assets/Corgi.png)
 
-**Modern system and service monitoring with data center planning and forecasting built-in.** Built using the power of Node.js
-with a modern, clean interface that allows for mobile support.
+- Modern system and service monitoring with data center planning and forecasting built-in.
+- Built using the power of Node.js with a modern, clean interface that allows for mobile support.
 
 Corgi is intended as an alternative to Nagios with a focus on modern interface and ease of use.
 
-Check the <a href="https://github.com/shepherds/corgi/wiki/Change-log" target="_blank">change log in the wiki</a> to see details about the latest release.
-
 ## Features
-* Supports both desktop and mobile screens.
-* Setup in 15 minutes or less.
-* Users and Groups with permissioning at all levels.
-* Ability to have real-time enviromental monitoring.
-* Data center planning and forecasting module.
-* Various widgets to allow for immediate details at all levels on systems and services.
-* Built to be scalable and fast!
-
-## Installation
-
-Start the server with `node corgi.js`.
-Direct a browser on the same machine to [http://0.0.0.0:3000/](http://0.0.0.0:3000/).
-
-## REST API
-TODO
-
-## Testing
+- Supports both desktop and mobile screens.
+- Setup in 15 minutes or less.
+- Users and Groups with permissioning at all levels.
+- Ability to have real-time enviromental monitoring.
+- Data center planning and forecasting module.
+- Various widgets to allow for immediate details at all levels on systems and services.
+- Built to be scalable and fast!
 
 ## Browser support
 
@@ -43,9 +33,15 @@ Compatible OS/Browsers:
 * iOS/Chrome
 * Android/Chrome
 
-## Dependencies
+# Demo
 
-Be sure to run `npm install && bower install` to fetch the latest dependencies.
+Coming Soon...
+
+# Installation
+
+To install corgi run the following command:
+    $ npm install && bower install
+
 Afterwards, be sure to build sockjs-client per [the instructions](https://github.com/sockjs/sockjs-client#development-and-testing).
 
 ```shell
@@ -58,19 +54,49 @@ make sockjs.js
 
 This application was built using node 0.10.21.
 
-## Performance
+# REST API
 
-## Memory footprint
+Not Yet Available
 
-## Wigets
+# Testing
+
+## Run corgi
+
+### Run the monitor server
+
+    $ node server.js
+
+or more probably you would want to use **forever** to run it in the background
+
+    $ forever start server.js
+
+### Run the web app
+
+    $ forever start webserver/app.js 3000 #(where 3000 is the port you want to use).
+
+# Tests
+
+Run the tests with mocha:
+
+    $ npm test
+
+## History
+
+**0.1**
+
+- First release.
+
+## Contributors
+
+- Marc Fisher
+- Clay Walker
 
 ## Contributing
+
 
 ## License 
 
 (The MIT License)
-
-Copyright (c) 2013 Louis Chatriot &lt;louis.chatriot@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -1,11 +1,11 @@
 /*global define*/
 define(
-  ['marionette','vent','tpl!templates/main/content.tmpl'],
-  function (Marionette, vent, content) {
+  ['marionette','vent','tpl!templates/main/dashboards.tmpl'],
+  function (Marionette, vent, tmpl) {
     'use strict';
 
     return Marionette.ItemView.extend({
-      template: content,
+      template: tmpl,
       events: {
         'click .new' : 'newDashboard'
       },
@@ -22,7 +22,7 @@ define(
       resize: function() {
       },
       newDashboard: function() {
-        vent.trigger('content:new');
+        vent.trigger('dashboards:new');
       }
     });
   }

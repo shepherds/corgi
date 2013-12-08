@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-sx-12">
+    <div class="mojitoPanel">
+      <div class="mojitoPanelHeader">
+        <i class="icon-hdd-o"></i>New Data Center
+      </div>
+      <div class="mojitoPanelContent" style="display: inline-block;width: 100%;">
+        <form action="/api/server" method="POST">
+          <fieldset>
+            <div class="form-group <%= (obj.valid && obj.valid.name) ? 'has-error' : '' %>">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" name="name" value="<%= obj.name %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.name) ? obj.valid.name : '' %></span>
+            </div>
+            <div class="form-group <%= (obj.valid && obj.valid.groups) ? 'has-error' : '' %>">
+              <label class="control-label">City</label>
+              <input type="text" class="form-control" name="groups" value="<%= obj.groups %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.groups) ? obj.valid.groups : '' %></span>
+            </div>
+            <div class="form-group <%= (obj.valid && obj.valid.datacenter) ? 'has-error' : '' %>">
+              <label class="control-label">Data Center</label>
+              <input type="text" class="form-control" name="datacenter" value="<%= obj.datacenter %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.datacenter) ? obj.valid.datacenter : '' %></span>
+            </div>
+            <div class="form-group <%= (obj.valid && obj.valid.cabinet) ? 'has-error' : '' %>">
+              <label class="control-label">Cabinet</label>
+              <input type="text" class="form-control" name="cabinet" value="<%= obj.cabinet %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.cabinet) ? obj.valid.cabinet : '' %></span>
+            </div>
+            <div class="form-group <%= (obj.valid && obj.valid.chasis) ? 'has-error' : '' %>">
+              <label class="control-label">Chasis</label>
+              <input type="text" class="form-control" name="chasis" value="<%= obj.chasis %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.chasis) ? obj.valid.chasis : '' %></span>
+            </div>
+            <!-- PING monitor, resource monitoring w/ SSH -->
+            <div class="form-group <%= (obj.valid && obj.valid.username) ? 'has-error' : '' %>">
+              <label class="control-label">Username</label>
+              <input type="text" class="form-control" name="username" value="<%= obj.username %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.username) ? obj.valid.username : '' %></span>
+            </div>
+            <div class="form-group <%= (obj.valid && obj.valid.password) ? 'has-error' : '' %>">
+              <label class="control-label">Password</label>
+              <input type="text" class="form-control" name="password" value="<%= obj.password %>">
+              <span class="help-block"><%= (obj.valid && obj.valid.password) ? obj.valid.password : '' %></span>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

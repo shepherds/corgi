@@ -9,6 +9,7 @@ define(
       className: 'tr-container container',
       events: {
         'click .mongo-toggle' : 'toggleMongo',
+        'click .login-toggle' : 'toggleLogin',
         'change [name]'       : 'updateModel',
         'submit #setup-form'  : 'verify'
       },
@@ -27,9 +28,14 @@ define(
         $(this.el).find('[name="mongo"]').val($(ev.currentTarget).text());
         this.render();
       },
+      toggleLogin: function(ev) {
+        this.model.set('loginmechanism', $(ev.currentTarget).text());
+        $(this.el).find('[name="loginmechanism"]').val($(ev.currentTarget).text());
+        this.render();
+      },
       updateModel: function(ev) {
-        debugger;
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
+        this.model.checkPasswords();
         this.doValidate();
       },
       doValidate: function() {
@@ -40,11 +46,14 @@ define(
         // Verify the form is filled out correctly.
         if (!this.model.isValid()) {
           this.doValidate();
+          console.log('Failed validation');
+          console.log(this.model.get('valid'));
           return false;
         }
 
         vent.trigger('route:remove', 'setup');
 
+        console.log('good!');
         $(this.el).find('#setup-form').submit();
       }
     });

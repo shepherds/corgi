@@ -2,10 +2,10 @@
 define(
   [
     'backbone','marionette','vent','text!pj',
-    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/admin/Users', 'views/main/Servers', 'views/main/Content', 'views/nav/Navbar'
+    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/admin/Users', 'views/main/Servers', 'views/main/Dashboards', 'views/main/DataCenters', 'views/nav/Navbar'
   ],
   function (
-    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Content, Navbar
+    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Dashboards, DataCenters, Navbar
   ) {
     'use strict';
 
@@ -33,8 +33,8 @@ define(
       hash = window.location.hash;
       router = new (Backbone.Marionette.AppRouter.extend({
         'routes': {
-          'home' : _.wrap(function home() {
-              app.main.show(new Content());
+          'dashboards' : _.wrap(function home() {
+              app.main.show(new Dashboards());
               changeNav('home');
             }, auth
           ),
@@ -49,7 +49,7 @@ define(
             }, auth
           ),
           'datacenters' : _.wrap(function datacenters() {
-              app.main.show(new Content());
+              app.main.show(new DataCenters());
               changeNav('data-centers');
             }, auth
           ),
@@ -82,7 +82,7 @@ define(
         else {
           app.navbar.show(new Navbar());
           if (hash.length === 0) {
-            router.navigate('#/home', {trigger: true});
+            router.navigate('#/dashboards', {trigger: true});
           }
         }
       });
