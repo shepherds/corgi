@@ -1,5 +1,5 @@
 define(
-  ['backbone'],
+  ['backbone','zxcvbn'],
   function (Backbone) {
     'use strict';
 
@@ -9,14 +9,14 @@ define(
         mongoaddr: '',
         mongoport: '27017',
         adminpassword: 'admin',
-        adminemail: '',
-        websocketsaddr: '',
+        adminemail: 'a@a.com',
+        websocketsaddr: 'localhost',
         pinginterval: '2',
         monitorinterval: '10',
         loginmechanism: 'Built-in',
         ldapurl: 'ldap://',
         ldapadminuser: 'cn=root',
-        ldapadminpassword: '',
+        ldapadminpassword: 'password',
         ldapsearchbase: 'dc=corp,dc=corporate,dc=com',
         ldapsearchfilter: '(uid={{username}})',
         packages: []
@@ -42,7 +42,7 @@ define(
           required: true,
           msg: 'LDAP URL is required.'
         },
-        ldapadminusername: {
+        ldapadminuser: {
           required: true,
           msg: 'LDAP administrator designated name is required.'
         },
@@ -68,6 +68,12 @@ define(
             return 'MongoDB service port number is required';
           }
         }
+      },
+      checkPasswords : function() {
+        console.log('checkPasswords');
+        console.log(zxcvbn(this.get('adminpassword')));
+        this.set('adminpassword_check', zxcvbn(this.get('adminpassword')));
+        console.log(this);
       }
     });
   }

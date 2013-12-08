@@ -27,6 +27,9 @@
 			<div class="form-group <%= (obj.valid && obj.valid.adminpassword) ? 'has-error' : '' %>">
 				<label class="control-label">Admin User Password</label>
 				<input type="password" class="form-control" name="adminpassword" placeholder="Password" value="<%= obj.adminpassword %>">
+				<% if (obj.adminpassword_check) { %>
+				<div class="bar" role="bar" style="z-index: 100;width: <%= (obj.adminpassword_check.score + 1) * 2 * 10 %>%;background: <%= obj.adminpassword_check.score < 2 ? 'red' : obj.adminpassword_check.score < 4 ? 'orange' : 'green' %>;height: 2px;transition: all 200ms ease; -webkit-transition: all 200ms ease;"></div>
+				<% } %>
 				<span class="help-block"><%= (obj.valid && obj.valid.adminpassword) ? obj.valid.adminpassword : '' %></span>
 			</div>
 			<div class="form-group <%= (obj.valid && obj.valid.adminemail) ? 'has-error' : '' %>">

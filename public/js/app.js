@@ -5,7 +5,7 @@ define(
     'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/admin/Users', 'views/main/Servers', 'views/main/Dashboards', 'views/main/DataCenters', 'views/nav/Navbar'
   ],
   function (
-    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Dashboards, DataCenter, Navbar
+    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Dashboards, DataCenters, Navbar
   ) {
     'use strict';
 

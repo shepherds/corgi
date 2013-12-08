@@ -35,6 +35,7 @@ define(
       },
       updateModel: function(ev) {
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
+        this.model.checkPasswords();
         this.doValidate();
       },
       doValidate: function() {
@@ -45,11 +46,14 @@ define(
         // Verify the form is filled out correctly.
         if (!this.model.isValid()) {
           this.doValidate();
+          console.log('Failed validation');
+          console.log(this.model.get('valid'));
           return false;
         }
 
         vent.trigger('route:remove', 'setup');
 
+        console.log('good!');
         $(this.el).find('#setup-form').submit();
       }
     });
