@@ -18,8 +18,7 @@ define(
         ldapadminuser: 'cn=root',
         ldapadminpassword: 'password',
         ldapsearchbase: 'dc=corp,dc=corporate,dc=com',
-        ldapsearchfilter: '(uid={{username}})',
-        packages: []
+        ldapsearchfilter: '(uid={{username}})'
       },
       validation: {
         adminpassword: {

@@ -67,3 +67,13 @@ https://docs.newrelic.com/docs/windows-server-monitoring/server-monitoring-alert
 https://docs.newrelic.com/docs/features/alert-api-examples
 SDK
 REST API (token)
+
+Modules
+	- package.json
+			* dir: lib/services/ftp
+			* file: ftp.js
+Add watch on lib
+npm install <module>
+Copies files as needed after cloning repo, watch picks up files
+Corgi[notifications][sms]
+Corgi[services][monitor][ssh]
