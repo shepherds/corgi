@@ -1,4 +1,3 @@
-<% console.log(obj) %>
 <div class="tr">
 	<h3 style="margin-top: 30px;"><i class="fa fa-magic"></i> Setup Information</h3>
 	<form id="setup-form" class="form" method="POST" action="/setup">
@@ -88,38 +87,6 @@
 				<label class="control-label">Default Interval (MONITOR)</label>
 				<input type="text" class="form-control" name="monitorinterval" value="<%= obj.monitorinterval %>">
 				<span class="help-block"><%= (obj.valid && obj.valid.monitorinterval) ? obj.valid.monitorinterval : '' %></span>
-			</div>
-		</fieldset>
-		<legend>Packages</legend>
-		<fieldset>
-			<p>Choose the packages below you wish to have installed initially.</p>
-			<div class="checkbox">
-				<label>
-			    	<input type="checkbox" value="1">
-			    	Package 1
-			  	</label>
-			  	<span class="help-block">Description</span>
-			</div>
-			<div class="checkbox">
-				<label>
-			    	<input type="checkbox" value="2">
-			    	Package 2
-				</label>
-				<span class="help-block">Description</span>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" value="3">
-			    	Package 3
-				</label>
-				<span class="help-block">Description</span>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" value="4">
-			    	Package 4
-				</label>
-				<span class="help-block">Description</span>
 			</div>
 		</fieldset>
 		<fieldset style="text-align: center;">

@@ -69,6 +69,6 @@
     "sockjs": "*",
     "nedb" : "*",
     "node-uuid" : "*",
-    "nodemailer" : "*"
+    "watch" : "*"
   }
 }
