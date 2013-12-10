@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col-sx-12">
-    <div class="mojitoPanel">
+  <div class="col-xs-12">
+    <div class="mojitoPanel" style="margin-top:50px;">
       <div class="mojitoPanelHeader">
         <i class="icon-hdd-o"></i>New Data Center
       </div>
-      <div class="mojitoPanelContent" style="display: inline-block;width: 100%;">
-        <form action="/api/server" method="POST">
+      <div class="mojitoPanelContent" style="display: inline-block;width: 100%;text-align: left;">
+        <form action="/api/datacenter/new" method="POST">
           <fieldset>
             <div class="form-group <%= (obj.valid && obj.valid.name) ? 'has-error' : '' %>">
               <label class="control-label">Name</label>
@@ -14,37 +14,34 @@
             </div>
           </fieldset>
           <fieldset>
-            <legned>Address</legend>
             <div class="form-group">
               <label class="control-label">Address Line 1</label>
-              <input name="address-line1" type="text">
+              <input name="address-line1" type="text" class="form-control">
               <span class="help-block"></span>
-              <span class="help-block">Street address, P.O. box, company name, c/o</span>
             </div>
             <div class="form-group">
               <label class="control-label">Address Line 2</label>
-              <input name="address-line2" type="text">
-              <span class="help-block">Apartment, suite , unit, building, floor, etc.</span>
+              <input name="address-line2" type="text" class="form-control">
             </div>
             <div class="form-group">
               <label class="control-label">City / Town</label>
-              <input name="city" type="text">
+              <input name="city" type="text" class="form-control">
               <span class="help-block"></span>
             </div>
             <div class="form-group">
               <label class="control-label">State / Province / Region</label>
-              <input name="region" type="text">
+              <input name="region" type="text" class="form-control">
               <span class="help-block"></span>
             </div>
             <div class="form-group">
               <label class="control-label">Zip / Postal Code</label>
-              <input name="postal-code" type="text">
+              <input name="postal-code" type="text" class="form-control">
               <span class="help-block"></span>
             </div>
             <div class="form-group">
               <label class="control-label">Country</label>
-              <select name="country">
-                <option value="" selected="selected">(please select a country)</option>
+              <select name="country" class="form-control">
+                <option value="" selected="selected">(Please Select A Country)</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AL">Albania</option>
                 <option value="DZ">Algeria</option>
@@ -288,6 +285,10 @@
             </div>
             <!-- Provide geo-lookup here w/ map -->
           </fieldset>
+          <div style="text-align: center;">
+            <a class="btn btn-danger" href="<%=  window.location.href.substring(0, window.location.href.lastIndexOf('/')) %>">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create</a>
+          </div>
         </form>
       </div>
     </div>

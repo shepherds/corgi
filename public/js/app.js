@@ -2,10 +2,12 @@
 define(
   [
     'backbone','marionette','vent','text!pj',
-    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/admin/Users', 'views/main/Servers', 'views/main/Dashboards', 'views/main/DataCenters', 'views/nav/Navbar'
+    'views/Login', 'views/Wizard', 'views/main/Admin', 'views/main/admin/Users', 'views/main/Servers', 'views/main/Dashboards', 'views/main/DataCenters', 
+    'views/main/datacenters/New', 'views/main/servers/New',
+    'views/nav/Navbar'
   ],
   function (
-    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Dashboards, DataCenters, Navbar
+    Backbone, Marionette, vent, pj, Login, Wizard, Admin, Users, Servers, Dashboards, DataCenters, NewDataCenter, NewServer, Navbar
   ) {
     'use strict';
 
@@ -43,6 +45,11 @@ define(
               changeNav('servers');
             }, auth
           ),
+          'servers/new' : _.wrap(function newserver() {
+              app.main.show(new NewServer());
+              changeNav('servers');
+            }, auth
+          ),
           'services' : _.wrap(function services() {
               app.main.show(new Content());
               changeNav('services');
@@ -50,6 +57,11 @@ define(
           ),
           'datacenters' : _.wrap(function datacenters() {
               app.main.show(new DataCenters());
+              changeNav('data-centers');
+            }, auth
+          ),
+          'datacenters/new' : _.wrap(function newdatacenter() {
+              app.main.show(new NewDataCenter());
               changeNav('data-centers');
             }, auth
           ),
