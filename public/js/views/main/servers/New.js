@@ -1,19 +1,27 @@
 /*global define*/
 define(
-  ['marionette','vent','tpl!templates/main/datacenters/new.tmpl','models/DataCenter'],
-  function (Marionette, vent, tmpl, DataCenter) {
+  ['marionette','vent','tpl!templates/main/servers/new.tmpl','models/Server'],
+  function (Marionette, vent, tmpl, Server) {
     'use strict';
 
     return Marionette.ItemView.extend({
       template: tmpl,
       className: 'container',
       events: {
-        'change [name]'            : 'updateModel',
-        'submit #datacenter-form'  : 'verify'
+        'change [name]'        : 'updateModel',
+        'submit #server-form'  : 'verify'
       },
       initialize: function() {
-        this.model = new DataCenter();
+        $(window).on('resize.newserver', _.bind(this.resize, this));
+      
+        this.model = new Server();
         Backbone.Validation.bind(this);
+      },
+      onClose: function() {
+        $(window).off('resize.newserver');
+      },
+      onShow: function() {
+        this.resize();
       },
       updateModel: function(ev) {
         this.model.set($(ev.currentTarget).attr('name'), $(ev.currentTarget).val());
@@ -30,7 +38,10 @@ define(
           return false;
         }
 
-        $(this.el).find('#datacenter-form').submit();
+        $(this.el).find('#server-form').submit();
+      },
+      resize: function() {
+        $(this.el).height($('body').height() - 51);
       }
     });
   }
